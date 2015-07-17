@@ -18,24 +18,24 @@ public class JpaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	public Long id;
 	@Column
-	private String no;
+	public String no;
 	@Version
 	@Column
 	private Integer version = 0;
 	@Column
-	private String creater;
+	public String creater;
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date createTime;
+	public Date createTime;
 	@Column
-	private String modifier;
+	public String modifier;
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date modifyTime;
+	public Date modifyTime;
 
 	public Long getId() {
 		return id;

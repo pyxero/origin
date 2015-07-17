@@ -41,13 +41,15 @@ define('ext/core', [ 'ext/gridx', 'ext/dialog', 'ext/form', 'ext/tree' ],
 					handleAs : 'json',
 					preventCache : true,
 					load : function(result) {
-						result = dojo.fromJson(result);
 						if (!result.flag) {
 							pathname = document.location.pathname;
 							path = pathname.substr(0, pathname.substr(1)
 									.indexOf('/') + 1);
-							alert('登陆超时返回首页');
-							location.href = path;
+							if (path == '') {
+								path = '/'
+							}
+							alert('登陆超时');
+							top.location.href = path;
 						}
 					}
 				});

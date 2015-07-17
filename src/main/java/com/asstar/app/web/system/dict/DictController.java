@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 import com.asstar.app.common.util.HttpUtil;
 import com.asstar.app.common.util.JsonUtil;
+import com.asstar.app.common.util.ResultUtil;
 
 @Controller
 public class DictController {
@@ -38,14 +39,17 @@ public class DictController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/dict/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void save(Dict dict) {
-		dictService.save(dict);
+	public String save(Dict dict) {
+		if (dict.getDict().getId() == null) {
+			dict.setDict(null);
+		}
+		return JsonUtil.toString(ResultUtil.set(dictService.save(dict)));
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/dict/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void delete(Dict dict) {
-		dictService.delete(dictService.findById(dict.getId()));
+	public String delete(Dict dict) {
+		return JsonUtil.toString(ResultUtil.set(dictService.delete(dictService.findById(dict.getId()))));
 	}
 
 }

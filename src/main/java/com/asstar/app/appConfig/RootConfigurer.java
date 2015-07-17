@@ -22,7 +22,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 //boot:4
 //boot:5
-@Import(SecurityConfigurer.class)
 @ComponentScan(basePackages = "com.asstar.app")
 @EnableJpaRepositories("com.asstar.app")
 @PropertySource(value = { "classpath:application.properties" })

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 
 public interface JpaService<M> {
 
@@ -16,8 +16,8 @@ public interface JpaService<M> {
 
 	public M findByNo(String no);
 
-	public void save(M m);
+	public boolean save(M m);
 
-	public void delete(M m);
+	public boolean delete(M m);
 
 }

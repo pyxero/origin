@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 
 public class HttpUtil {
 

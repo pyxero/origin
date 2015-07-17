@@ -1,4 +1,4 @@
-package com.asstar.app.common.page;
+package com.asstar.app.common.entity;
 
 import java.util.List;
 

@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.asstar.app.authority.Authority;
 
@@ -23,15 +24,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/path", "/login", "/certificate")
-				.permitAll()
-				.antMatchers("/**").hasRole("LOGIN")
-				.anyRequest().authenticated().and()
-				.formLogin().loginPage("/path?url=login")
-				.usernameParameter("no")
-				.passwordParameter("password")
-				.permitAll();
+		http.authorizeRequests().antMatchers("/verify", "/certificate", "/session").permitAll().anyRequest()
+				.hasRole("LOGIN");
+		http.formLogin().loginPage("/login").usernameParameter("no").passwordParameter("password").permitAll();
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 
 	@Override

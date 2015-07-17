@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 import com.asstar.app.common.util.HttpUtil;
 import com.asstar.app.common.util.JsonUtil;
+import com.asstar.app.common.util.ResultUtil;
 
 @Controller
 public class RoleController {
@@ -38,14 +39,14 @@ public class RoleController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/role/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void save(Role role) {
-		roleService.save(role);
+	public String save(Role role) {
+		return JsonUtil.toString(ResultUtil.set(roleService.save(role)));
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/role/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void delete(Role role) {
-		roleService.delete(roleService.findById(role.getId()));
+	public String delete(Role role) {
+		return JsonUtil.toString(ResultUtil.set(roleService.delete(roleService.findById(role.getId()))));
 	}
 
 }

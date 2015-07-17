@@ -14,7 +14,7 @@ public class Role extends JpaEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	public String name;
 
 	public String getName() {
 		return name;

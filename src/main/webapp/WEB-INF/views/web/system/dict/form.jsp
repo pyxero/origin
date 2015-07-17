@@ -19,7 +19,7 @@
 
 		var ps = ext.form.pSelect({
 			name : 'dict.id',
-			required : true
+			required : false
 		}, dojo.query('input[name=\'dict.id\']', dijit.byId('G_dict_D').domNode)[0]);
 		dojo.connect(ps, 'onClick', function() {
 			ext.dialog({

@@ -15,7 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 import com.asstar.app.common.util.SqlUtil;
 
 public abstract class JpaServiceImpl<M, ID extends Serializable> implements JpaService<M> {
@@ -65,12 +65,22 @@ public abstract class JpaServiceImpl<M, ID extends Serializable> implements JpaS
 		}
 	}
 
-	public void save(M m) {
-		jpaDao.save(m);
+	public boolean save(M m) {
+		try {
+			jpaDao.save(m);
+			return true;
+		} catch (Exception e) {
+			return true;
+		}
 	}
 
-	public void delete(M m) {
-		jpaDao.delete(m);
+	public boolean delete(M m) {
+		try {
+			jpaDao.delete(m);
+			return true;
+		} catch (Exception e) {
+			return true;
+		}
 	}
 
 }

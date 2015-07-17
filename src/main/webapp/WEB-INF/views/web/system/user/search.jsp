@@ -29,22 +29,18 @@
 		<tr>
 			<td><label>用户编号:</label></td>
 			<td><input type="text" name="no" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:false" /></td>
-			<td><label>员工号:</label></td>
-			<td><input type="text" name="employee.no" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:false" /></td>
+			<td><label>用户姓名:</label></td>
+			<td><input type="text" name="username" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>
 		</tr>
 		<tr>
-			<td><label>员工姓名:</label></td>
-			<td><input type="text" name="employee.name" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:false" /></td>
-			<td><label>账户可用:</label></td>
+		<td><label>账户可用:</label></td>
 			<td><input type="text" name="enabled" data-dojo-type="dijit/form/FilteringSelect" /></td>
-		</tr>
-		<tr>
 			<td><label>账户过期:</label></td>
 			<td><input type="text" name="accountNonExpired" data-dojo-type="dijit/form/FilteringSelect" /></td>
-			<td><label>账户锁定:</label></td>
-			<td><input type="text" name="accountNonLocked" data-dojo-type="dijit/form/FilteringSelect" /></td>
 		</tr>
 		<tr>
+			<td><label>账户锁定:</label></td>
+			<td><input type="text" name="accountNonLocked" data-dojo-type="dijit/form/FilteringSelect" /></td>
 			<td><label>凭据过期:</label></td>
 			<td><input type="text" name="credentialsNonExpired" data-dojo-type="dijit/form/FilteringSelect" /></td>
 		</tr>

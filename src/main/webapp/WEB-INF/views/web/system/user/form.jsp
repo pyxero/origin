@@ -22,28 +22,9 @@
 				data : data
 			});
 		});
-		var employeeSelect = ext.form.pSelect({
-			name : 'employee.id',
-			required : true
-		}, dojo.query('input[name=\'employee.id\']', dijit.byId('G_user_D').domNode)[0]);
-
-		dojo.connect(employeeSelect, 'onClick', function() {
-			ext.dialog({
-				id : 'G_user_F_S',
-				title : '员工选择',
-				href : 'path?url=system/user/select',
-				style : 'width:570px;height:350px;',
-				ext : {
-					transmit : employeeSelect
-				}
-			}).show();
-		});
 		var dialog = dijit.byId('G_user_D');
 		if (dialog.ext.type == 1) {
 			var callback = function(data) {
-				employeeSelect.store = new dojo.store.Memory({
-					data : [ data.employee ]
-				});
 				G_user_F.setValues(data);
 			};
 			ext.get({
@@ -53,7 +34,7 @@
 				},
 				callback : callback
 			});
-		}
+		}		
 	});
 </script>
 <div data-dojo-id="G_user_F" data-dojo-type="dijit/form/Form" encType="multipart/form-data">
@@ -63,8 +44,8 @@
 			<input type="hidden" name="id" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:false" />
 			<input type="hidden" name="version" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="value:0" />
 			<td><input type="text" name="no" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>
-			<td><label>员工</label></td>
-			<td><input type="text" name="employee.id" data-dojo-type="dijit/form/FilteringSelect" data-dojo-props="required:false" /></td>
+			<td><label>用户姓名:</label></td>
+			<td><input type="text" name="username" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>			
 		</tr>
 		<tr>
 			<td><label>账户可用:</label></td>

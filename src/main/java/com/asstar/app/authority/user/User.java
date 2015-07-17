@@ -21,12 +21,12 @@ public class User extends JpaEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String username;
-	private String password;
-	private Boolean enabled;
-	private Boolean accountNonExpired;
-	private Boolean accountNonLocked;
-	private Boolean credentialsNonExpired;
+	public String username;
+	public String password;
+	public Boolean enabled;
+	public Boolean accountNonExpired;
+	public Boolean accountNonLocked;
+	public Boolean credentialsNonExpired;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private Set<Role> roles = new HashSet<Role>();

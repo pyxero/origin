@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 import com.asstar.app.common.util.HttpUtil;
 import com.asstar.app.common.util.JsonUtil;
+import com.asstar.app.common.util.ResultUtil;
 import com.asstar.app.web.system.dict.Dict;
 
 @Controller
@@ -40,19 +41,19 @@ public class MenuController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/menu/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void save(Menu menu) {
+	public String save(Menu menu) {
 
 		if (menu.getMenu().getId() == null) {
 			menu.setMenu(null);
 		}
-		menuService.save(menu);
+		return JsonUtil.toString(ResultUtil.set(menuService.save(menu)));
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/menu/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void delete(Menu menu) {
+	public String delete(Menu menu) {
 
-		menuService.delete(menuService.findById(menu.getId()));
+		return JsonUtil.toString(ResultUtil.set(menuService.delete(menuService.findById(menu.getId()))));
 	}
 
 }

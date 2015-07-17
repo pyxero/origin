@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.asstar.app.common.page.PageEntity;
+import com.asstar.app.common.entity.PageEntity;
 import com.asstar.app.common.util.HttpUtil;
 import com.asstar.app.common.util.JsonUtil;
+import com.asstar.app.common.util.ResultUtil;
 
 @Controller
 public class UserController {
@@ -38,14 +39,14 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/user/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void save(User user) {
-		userService.save(user);
+	public String save(User user) {
+		return JsonUtil.toString(ResultUtil.set(userService.save(user)));
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/sys/user/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
-	public void delete(User user) {
-		userService.delete(userService.findById(user.getId()));
+	public String delete(User user) {
+		return JsonUtil.toString(ResultUtil.set(userService.delete(userService.findById(user.getId()))));
 	}
 
 }

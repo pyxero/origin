@@ -9,22 +9,10 @@
 			name : '用户编号',
 			field : 'no',
 			width : '120px'
-		}, {
-			name : '员工号',
-			field : 'employee',
-			width : '120px',
-			decorator : function(cellData, rowId, rowIndex) {
-				data = cellData == null ? '' : cellData.no;
-				return data;
-			}
-		}, {
-			name : '员工姓名',
-			field : 'employee',
-			width : '120px',
-			decorator : function(cellData, rowId, rowIndex) {
-				data = cellData == null ? '' : cellData.name;
-				return data;
-			}
+		},{
+			name : '用户姓名',
+			field : 'username',
+			width : '120px'
 		}, {
 			name : '账户可用',
 			field : 'enabled',
