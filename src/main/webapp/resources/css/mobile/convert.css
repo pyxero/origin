@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+.WSCSlideWrapper {
+	width: 420px;
+	height: 180px;
+	position: relative;
+	overflow: hidden;
+}
+
+.WSCSlide {
+	width: 1680px;
+	height: 100%;
+	font-size: 0;
+	position: absolute;
+	-webkit-transform: translate3d(0, 0, 0);
+}
+
+.WSCSlideTransition {
+	-webkit-transition: all 0.5s 0s ease-in-out;
+}
+
+.WSCSlide_img {
+	width: 420px;
+	height: 180px;
+}
