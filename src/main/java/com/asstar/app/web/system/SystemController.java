@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,14 +28,9 @@ public class SystemController {
 	@Autowired
 	private MenuService menuService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
-
 	@ResponseBody
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
-	public String verify(HttpServletRequest request, Model model, User user) {
+	public String verify(User user) {
 		try {
 			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getNo(),
 					user.getPassword());

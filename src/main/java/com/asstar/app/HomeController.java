@@ -6,11 +6,20 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mobile.device.site.SitePreference;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.asstar.app.common.entity.OAuthEntity;
+import com.asstar.app.common.util.OAuthUtil;
 
 /**
  * Handles requests for the application home page.
@@ -18,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
+	@Autowired
+	@Qualifier("authenticationManager")
+	protected AuthenticationManager authenticationManager;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -45,6 +57,21 @@ public class HomeController {
 	@RequestMapping(value = "/path", method = RequestMethod.GET)
 	public String path(Locale locale, String url) {
 		return url;
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(String code, Model model) {
+		if (code != null) {
+			OAuthEntity oAuth = OAuthUtil.getUserInfo(code);
+			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(oAuth.getUserId(),
+					"000000");
+			Authentication authentication = authenticationManager.authenticate(authRequest);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			return "app";
+		} else {
+			return "login";
+		}
+
 	}
 
 }

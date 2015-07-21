@@ -1,6 +1,7 @@
 package com.asstar.app.mobile;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,5 +32,11 @@ public class Certificate {
 			return "error";
 		}
 
+	}
+
+	@RequestMapping(value = "/authorize", method = RequestMethod.GET)
+	public String authorize(Model model, String code) {
+		model.addAttribute("code", code);
+		return "login";
 	}
 }
