@@ -4,8 +4,6 @@
 <head>
 <title>mobile</title>
 <%@ include file="../common/mobile/lib.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mobile/convert.css" />
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/convert.js"></script>
 </head>
 <body>
 	<div data-role="page" style="background-color: white;">
@@ -19,12 +17,10 @@
 		<div role="main" style="background-color: #ddd; margin-top: -123px;">
 			<div>
 				<div style="width: 100%; height: 60%;" class="WSCSlideWrapper">
-					<div class="WSCSlide WSCSlideTransition">
-						<img class="WSCSlide_img" src="resources/img/goods/salesmore/559cf2aeN2ea5ba05.jpg" /> <img class="WSCSlide_img"
-							src="resources/img/goods/salesmore/559e1497N85fbadbd.jpg" /> <img class="WSCSlide_img" src="resources/img/goods/salesmore/559f74f7N2e8c3438.jpg" />
-					</div>
+					<img class="WSCSlide_img"
+						src="resources/img/goods/salesmore/559cf2aeN2ea5ba05.jpg" />
 					<div class="WSCSlideStatus"></div>
-				</div>					
+				</div>
 			</div>
 			<div class="ui-grid-a" style="padding: 1 1 1 1;">
 				<div class="ui-block-a">
@@ -109,13 +105,4 @@
 		<!-- /footer -->
 	</div>
 </body>
-	<script type="text/javascript">
-	WSCMobileSlide({
-		"WSCSlideTransition" : "WSCSlideTransition",
-		"WSCSlideWrapper" : $(".WSCSlideWrapper"),
-		"WSCSlide" : $(".WSCSlide"),
-		"WSCSlide_img" : $(".WSCSlide_img"),
-		"timerNum" : 3000
-	});
-	</script>
 </html>
