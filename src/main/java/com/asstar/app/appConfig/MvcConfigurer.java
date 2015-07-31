@@ -27,7 +27,7 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
 		delegate.setPrefix("/WEB-INF/views/");
 		delegate.setSuffix(".jsp");
 		LiteDeviceDelegatingViewResolver resolver = new LiteDeviceDelegatingViewResolver(delegate);
-		resolver.setNormalPrefix("web/");
+		resolver.setNormalPrefix("mobile/");
 		resolver.setMobilePrefix("mobile/");
 		resolver.setTabletPrefix("mobile/");
 		return resolver;
