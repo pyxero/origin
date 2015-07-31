@@ -27,19 +27,19 @@
 			<input id="search" type="search" value="" style="width: 100%; height: 100%;">
 		</div>
 		<div role="main"
-			style="background-color: #ddd; position: absolute; z-index: 999; top: 0; bottom: 0;">
+			style="width: 100%; height: 82%; background-color: #ddd; position: absolute; z-index: 999; top: 0; bottom: 0;">
 			<img src="resources/img/goods/salesmore/559cf2aeN2ea5ba05.jpg"
 				style="width: 100%; height: 50%;" />
 			<div class="ui-grid-a" style="padding: 1 1 1 1;">
 				<div class="ui-block-a">
 					<a href="#" style="text-decoration: none;">
 						<div class="ui-bar ui-bar-a"
-							style="height: 100%; background: white; text-align: center;">
+							style="height: 40%; background: white; text-align: center;">
 							<img alt="" src="resources/img/goods/winepress.jpg"
 								style="width: 100%; height: 80%;">
 							<div style="width: 100%; height: 20%; text-align: center;">
 								<p
-									style="margin: 0 0 0 0; font-size: 20px; font: 22px/24px Arial, Helvetica, sans-serif; color: #9D9D9D;">美的WJS1241E
+									style="margin: 0 0 0 0; font-size: 13px; font: 13px/15px Arial, Helvetica, sans-serif; color: #9D9D9D;">美的WJS1241E
 									料理原汁机多功能果汁机慢速榨汁机</p>
 							</div>
 						</div>
@@ -48,12 +48,12 @@
 				<div class="ui-block-b">
 					<a href="#" style="text-decoration: none;">
 						<div class="ui-bar ui-bar-a"
-							style="height: 100%; background: white; text-align: center;">
+							style="height: 40%; background: white; text-align: center;">
 							<img alt="" src="resources/img/goods/purifier.jpg"
 								style="width: 100%; height: 80%;">
 							<div style="width: 100%; height: 20%; text-align: center;">
 								<p
-									style="margin: 0 0 0 0; font-size: 20px; font: 22px/24px Arial, Helvetica, sans-serif; color: #9D9D9D;">瑞典布鲁雅尔303
+									style="margin: 0 0 0 0; font-size: 13px; font: 13px/15px Arial, Helvetica, sans-serif; color: #9D9D9D;">瑞典布鲁雅尔303
 									空气净化器[CADR:280立方米/小时]</p>
 							</div>
 						</div>
@@ -62,12 +62,12 @@
 				<div class="ui-block-a">
 					<a href="#" style="text-decoration: none;">
 						<div class="ui-bar ui-bar-a"
-							style="height: 100%; background: white; text-align: center;">
+							style="height: 40%; background: white; text-align: center;">
 							<img alt="" src="resources/img/goods/earphone.jpg"
 								style="width: 100%; height: 80%;">
 							<div style="width: 100%; height: 20%; text-align: center;">
 								<p
-									style="margin: 0 0 0 0; font-size: 20px; font: 22px/24px Arial, Helvetica, sans-serif; color: #9D9D9D;">Beats
+									style="margin: 0 0 0 0; font-size: 13px; font: 13px/15px Arial, Helvetica, sans-serif; color: #9D9D9D;">Beats
 									Mixr混音师 头戴贴耳监听耳机 Hi-Fi版 黄色带麦</p>
 							</div>
 						</div>
@@ -76,12 +76,12 @@
 				<div class="ui-block-b">
 					<a href="#" style="text-decoration: none;">
 						<div class="ui-bar ui-bar-a"
-							style="height: 100%; background: white; text-align: center;">
+							style="height: 40%; background: white; text-align: center;">
 							<img alt="" src="resources/img/goods/televisor.jpg"
 								style="width: 100%; height: 80%;">
 							<div style="width: 100%; height: 20%; text-align: center;">
 								<p
-									style="margin: 0 0 0 0; font-size: 20px; font: 22px/24px Arial, Helvetica, sans-serif; color: #9D9D9D;">飞利浦55PFF3655/T3
+									style="margin: 0 0 0 0; font-size: 13px; font: 13px/15px Arial, Helvetica, sans-serif; color: #9D9D9D;">飞利浦55PFF3655/T3
 									55英寸全高清LED液晶电视(黑色)</p>
 							</div>
 						</div>
