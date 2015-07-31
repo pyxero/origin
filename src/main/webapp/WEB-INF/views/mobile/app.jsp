@@ -6,13 +6,25 @@
 <title>mobile</title>
 <%@ include file="../common/mobile/lib.jsp"%>
 <style type="text/css">
+.alpha {
+	background-color: #eee;
+	border-color: #ddd;
+	opacity: 0.5;
+	filter: alpha(opacity : 50);
+}
 </style>
+<script type="text/javascript">
+	$().ready(function() {
+		$('#search').parent().removeClass('ui-body-inherit');
+		$('#search').parent().addClass('alpha')
+	});
+</script>
 </head>
 <body>
 	<div data-role="page" style="background-color: white; width: 100%; height: 100%;">
 		<div data-role="header" data-position="fixed" data-tap-toggle="false"
-			style="width: 100%; height: 20%; background: none; border: 0px;">
-			<input type="search" value="" style="width: 100%; height: 80%;">
+			style="width: 100%; height: 8%; background: none; border: 0px;">
+			<input id="search" type="search" value="" style="width: 100%; height: 100%;">
 		</div>
 		<div role="main"
 			style="background-color: #ddd; position: absolute; z-index: 999; top: 0; bottom: 0;">
@@ -80,18 +92,18 @@
 			</div>
 		</div>
 		<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b"
-			style="height: 20%;">
+			style="height: 10%;">
 			<div data-role="navbar" class="ui-navbar" role="navigation">
 				<ul class="ui-grid-b">
 					<li class="ui-block-a"><a href="#" data-icon="home"
-						class="ui-link ui-btn ui-icon-home ui-btn-icon-top" style="font-size: 27.5px;">首页</a></li>
+						class="ui-link ui-btn ui-icon-home ui-btn-icon-top" style="font-size: 16px;">首页</a></li>
 					<!-- ui-btn-active -->
 					<li class="ui-block-b"><a href="#" data-icon="star"
-						class="ui-link ui-btn ui-icon-star ui-btn-icon-top" style="font-size: 27.5px;">收藏</a></li>
+						class="ui-link ui-btn ui-icon-star ui-btn-icon-top" style="font-size: 16px;">收藏</a></li>
 					<li class="ui-block-c"><a href="#" data-icon="grid"
-						class="ui-link ui-btn ui-icon-grid ui-btn-icon-top" style="font-size: 27.5px;">购物车</a></li>
+						class="ui-link ui-btn ui-icon-grid ui-btn-icon-top" style="font-size: 16px;">购物车</a></li>
 					<li class="ui-block-d"><a href="#" data-icon="user"
-						class="ui-link ui-btn ui-icon-user ui-btn-icon-top" style="font-size: 27.5px;">我的</a></li>
+						class="ui-link ui-btn ui-icon-user ui-btn-icon-top" style="font-size: 16px;">我的</a></li>
 				</ul>
 			</div>
 		</div>
