@@ -36,21 +36,26 @@
 </script>
 </head>
 <body>
-	<div data-role="page" data-dialog="true" data-url="" data-external-page="true" tabindex="0" data-close-btn="none" class="ui-page ui-page-theme-a ui-dialog ui-page-active">
-		<div data-role="header" role="banner" class="ui-header ui-bar-b">
-			<h1 class="ui-title" role="heading" aria-level="1">登录</h1>
+	<div data-role="page">
+		<div data-role="header" data-position="fixed">
+			<h1 class="ui-title" role="heading" aria-level="1">星流商城</h1>
 		</div>
 		<div role="main" class="ui-content">
 			<p>
-				<label for="text-basic">用户:</label> <input type="text" name="no" id="text-basic" value="">
+				<label for="text-basic">用户:</label>
+				<input type="text" name="no" id="text-basic" value="">
 			</p>
 			<p>
-				<label for="text-basic">名称:</label> <input type="password" name="password" id="text-basic" value="">
+				<label for="text-basic">名称:</label>
+				<input type="password" name="password" id="text-basic" value="">
 			</p>
 			<p>
 				<label id="error"></label>
 			</p>
 			<a href="javascript:submit();" class="ui-btn ui-shadow ui-corner-all ui-btn-a">登录</a>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<h1 class="ui-title" role="heading" aria-level="1">Copyright © 2015 AsStar</h1>
 		</div>
 	</div>
 </body>

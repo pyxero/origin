@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.asstar.app.authority.user.User;
+import com.asstar.app.authority.user.UserService;
 import com.asstar.app.common.entity.OAuthEntity;
 import com.asstar.app.common.util.OAuthUtil;
 
@@ -30,6 +32,8 @@ public class HomeController {
 	@Autowired
 	@Qualifier("authenticationManager")
 	protected AuthenticationManager authenticationManager;
+	@Autowired
+	private UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -63,8 +67,16 @@ public class HomeController {
 	public String login(String code, Model model) {
 		if (code != null) {
 			OAuthEntity oAuth = OAuthUtil.getUserInfo(code);
+			logger.info("login user: " + oAuth.getUserId());
+			User user = userService.findByNo(oAuth.getUserId());
+			String password = "";
+			if (user != null) {
+				password = user.getPassword();
+			} else {
+				return "login";
+			}
 			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(oAuth.getUserId(),
-					"000000");
+					password);
 			Authentication authentication = authenticationManager.authenticate(authRequest);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			return "app";
