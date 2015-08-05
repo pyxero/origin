@@ -3,7 +3,7 @@
 	require([ 'ext/core' ], function(ext) {
 		ext.gridx({
 			id : 'G_dict_F_S_G',
-			url : 'sys/dict/list',
+			url : 's/dict/list',
 			style : 'height:250px;',
 			structure_self : true,
 			structure : [ {
@@ -56,7 +56,7 @@
 						dijit.byId('G_dict_F_S').destroyRecursive();
 					};
 					ext.get({
-						url : 'sys/dict/find',
+						url : 's/dict/find',
 						content : {
 							id : id
 						},

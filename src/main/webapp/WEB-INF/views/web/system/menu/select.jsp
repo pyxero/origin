@@ -3,7 +3,7 @@
 	require([ 'ext/core' ], function(ext) {
 		ext.gridx({
 			id : 'G_menu_F_S_G',
-			url : 'sys/menu/list',
+			url : 's/menu/list',
 			style : 'height:250px;',
 			structure_self : true,
 			structure : [ {
@@ -45,7 +45,7 @@
 						dijit.byId('G_menu_F_S').destroyRecursive();
 					};
 					ext.get({
-						url : 'sys/menu/find',
+						url : 's/menu/find',
 						content : {
 							id : id
 						},

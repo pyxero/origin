@@ -42,7 +42,7 @@
 				<table>
 					<tr>
 						<td width="80%"><img id="loading" alt="loading"
-							src="<%=request.getContextPath()%>/resources/ui/dojo/gridx/resources/images/loadingAnimation.gif">
+							src="<%=request.getContextPath()%>/resources/ui/web/dojo/gridx/resources/images/loadingAnimation.gif">
 							<div id="message" style="color: red; text-align: left;"></div></td>
 						<td><button data-dojo-id="submit"
 								data-dojo-type="dijit/form/Button" type="button">

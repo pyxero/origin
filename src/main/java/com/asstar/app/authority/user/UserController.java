@@ -24,27 +24,27 @@ public class UserController {
 	private UserService userService;
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/user/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/user/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public HttpEntity<List<?>> list(HttpServletRequest request, PageEntity pEntity, User user) {
 		Page<User> page = userService.page(user, pEntity);
 		return HttpUtil.httpPage(page);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/user/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/user/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String find(User user) {
 		String result = JsonUtil.toString(userService.findById(user.getId()));
 		return result;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/user/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/user/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(User user) {
 		return JsonUtil.toString(ResultUtil.set(userService.save(user)));
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/user/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/user/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String delete(User user) {
 		return JsonUtil.toString(ResultUtil.set(userService.delete(userService.findById(user.getId()))));
 	}

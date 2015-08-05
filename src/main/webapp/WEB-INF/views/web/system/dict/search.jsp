@@ -26,7 +26,7 @@
 				require([ 'ext/core' ], function(ext) {
 					ext.gridx.store({
 						id : 'G_dict',
-						url : 'sys/dict/list',
+						url : 's/dict/list',
 						query : dojo.formToJson(G_dict_Q_F.id)
 					});
 					dijit.byId('G_dict_Q').hide();

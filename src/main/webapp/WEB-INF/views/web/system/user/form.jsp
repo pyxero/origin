@@ -28,7 +28,7 @@
 				G_user_F.setValues(data);
 			};
 			ext.get({
-				url : 'sys/user/find',
+				url : 's/user/find',
 				content : {
 					id : dijit.byId('G_user_D').ext.select
 				},
@@ -80,7 +80,7 @@
 							}
 						};
 						ext.form.submit({
-							url : 'sys/user/save',
+							url : 's/user/save',
 							form : G_user_F.domNode,
 							callback : callback,
 						});

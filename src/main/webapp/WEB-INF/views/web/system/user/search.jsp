@@ -53,7 +53,7 @@
 				require([ 'ext/core' ], function(ext) {
 					ext.gridx.store({
 						id : 'G_user',
-						url : 'sys/user/list',
+						url : 's/user/list',
 						query : dojo.formToJson(G_user_Q_F.id),
 						search : G_user_Q_F.getValues()
 					});

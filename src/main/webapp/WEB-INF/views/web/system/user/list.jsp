@@ -3,7 +3,7 @@
 	require([ 'ext/core' ], function(ext) {
 		var model = {
 			id : 'G_user',
-			url : 'sys/user/list'
+			url : 's/user/list'
 		};
 		model.structure = [ {
 			name : '用户编号',
@@ -76,11 +76,11 @@
 						var callback = function(data) {
 							ext.gridx.store({
 								id : 'G_user',
-								url : 'sys/user/list'
+								url : 's/user/list'
 							});
 						};
 						ext.get({
-							url : 'sys/user/delete',
+							url : 's/user/delete',
 							content : {
 								id : id
 							},

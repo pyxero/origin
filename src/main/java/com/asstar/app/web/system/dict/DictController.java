@@ -24,21 +24,21 @@ public class DictController {
 	private DictService dictService;
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/dict/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/dict/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public HttpEntity<List<?>> list(HttpServletRequest request, PageEntity pEntity, Dict dict) {
 		Page<Dict> page = dictService.page(dict, pEntity);
 		return HttpUtil.httpPage(page);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/dict/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/dict/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String find(Dict dict) {
 		String result = JsonUtil.toString(dictService.findById(dict.getId()));
 		return result;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/dict/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/dict/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(Dict dict) {
 		if (dict.getDict().getId() == null) {
 			dict.setDict(null);
@@ -47,7 +47,7 @@ public class DictController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/dict/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/dict/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String delete(Dict dict) {
 		return JsonUtil.toString(ResultUtil.set(dictService.delete(dictService.findById(dict.getId()))));
 	}

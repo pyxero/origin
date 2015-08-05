@@ -38,7 +38,7 @@
 				require([ 'ext/core' ], function(ext) {
 					ext.gridx.store({
 						id : 'G_menu',
-						url : 'sys/menu/list',
+						url : 's/menu/list',
 						query : dojo.formToJson(G_menu_Q_F.id)
 					});
 					dijit.byId('G_menu_Q').hide();

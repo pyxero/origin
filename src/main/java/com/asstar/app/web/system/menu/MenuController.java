@@ -25,14 +25,14 @@ public class MenuController {
 	private MenuService menuService;
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/menu/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/menu/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public HttpEntity<List<?>> list(HttpServletRequest request, PageEntity pEntity, Menu menu) {
 		Page<Menu> page = menuService.page(menu, pEntity, Menu.class, Dict.class);
 		return HttpUtil.httpPage(page);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/menu/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/menu/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String find(Menu menu) {
 
 		String result = JsonUtil.toString(menuService.findById(menu.getId()));
@@ -40,7 +40,7 @@ public class MenuController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/menu/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/menu/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(Menu menu) {
 
 		if (menu.getMenu().getId() == null) {
@@ -50,7 +50,7 @@ public class MenuController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/menu/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/menu/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String delete(Menu menu) {
 
 		return JsonUtil.toString(ResultUtil.set(menuService.delete(menuService.findById(menu.getId()))));

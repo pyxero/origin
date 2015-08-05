@@ -3,7 +3,7 @@
 	require([ 'ext/core' ], function(ext) {
 		var model = {
 			id : 'G_dict',
-			url : 'sys/dict/list'
+			url : 's/dict/list'
 		};
 		model.structure = [ {
 			name : "区分编号",
@@ -84,11 +84,11 @@
 						var callback = function(data) {
 							ext.gridx.store({
 								id : 'G_dict',
-								url : 'sys/dict/list'
+								url : 's/dict/list'
 							});
 						};
 						ext.get({
-							url : 'sys/dict/delete',
+							url : 's/dict/delete',
 							content : {
 								id : id
 							},

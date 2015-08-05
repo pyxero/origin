@@ -54,7 +54,7 @@ public class SystemController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/menu/data", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/menu/data", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String menu() {
 		return JsonUtil.toString(menuService.findAll());
 	}

@@ -1,9 +1,9 @@
 @CHARSET "UTF-8";
-@import "../../ui/dojo/dojo/resources/dojo.css";
-@import "../../ui/dojo/dijit/themes/claro/claro.css";
-@import "../../ui/dojo/dijit/themes/claro/document.css";
-@import "../../ui/dojo/dojox/grid/resources/claroGrid.css";
-@import "../../ui/dojo/gridx/resources/claro/Gridx.css";
+@import "../../ui/web/dojo/dojo/resources/dojo.css";
+@import "../../ui/web/dojo/dijit/themes/claro/claro.css";
+@import "../../ui/web/dojo/dijit/themes/claro/document.css";
+@import "../../ui/web/dojo/dojox/grid/resources/claroGrid.css";
+@import "../../ui/web/dojo/gridx/resources/claro/Gridx.css";
 
 html, body {
     width: 100%;
@@ -22,7 +22,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 1em;
-    background: #fff url('../../ui/dojo/dijit/themes/claro/images/loadingAnimation.gif') no-repeat center center;
+    background: #fff url('../../ui/web/dojo/dijit/themes/claro/images/loadingAnimation.gif') no-repeat center center;
     position: absolute;
     z-index: 999;
     font-size: 24px;

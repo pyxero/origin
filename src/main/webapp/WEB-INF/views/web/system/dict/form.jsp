@@ -42,7 +42,7 @@
 				G_dict_F.setValues(data);
 			};
 			ext.get({
-				url : 'sys/dict/find',
+				url : 's/dict/find',
 				content : {
 					id : dijit.byId('G_dict_D').ext.select
 				},
@@ -102,7 +102,7 @@
 							}
 						};
 						ext.form.submit({
-							url : 'sys/dict/save',
+							url : 's/dict/save',
 							form : G_dict_F.domNode,
 							callback : callback,
 						});

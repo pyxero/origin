@@ -24,27 +24,27 @@ public class RoleController {
 	private RoleService roleService;
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/role/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/role/list", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public HttpEntity<List<?>> list(HttpServletRequest request, PageEntity pEntity, Role role) {
 		Page<Role> page = roleService.page(role, pEntity);
 		return HttpUtil.httpPage(page);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/role/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/role/find", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String find(Role role) {
 		String result = JsonUtil.toString(roleService.findById(role.getId()));
 		return result;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/role/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/role/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(Role role) {
 		return JsonUtil.toString(ResultUtil.set(roleService.save(role)));
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/sys/role/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/s/role/delete", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String delete(Role role) {
 		return JsonUtil.toString(ResultUtil.set(roleService.delete(roleService.findById(role.getId()))));
 	}

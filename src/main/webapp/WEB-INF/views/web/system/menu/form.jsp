@@ -51,7 +51,7 @@
 				G_menu_F.setValues(data);
 			};
 			ext.get({
-				url : 'sys/menu/find',
+				url : 's/menu/find',
 				content : {
 					id : dijit.byId('G_menu_D').ext.select
 				},
@@ -104,7 +104,7 @@
 							}
 						};
 						ext.form.submit({
-							url : 'sys/menu/save',
+							url : 's/menu/save',
 							form : G_menu_F.domNode,
 							callback : callback,
 						});

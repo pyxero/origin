@@ -42,20 +42,22 @@
 		</div>
 		<div role="main" class="ui-content">
 			<p>
-				<label for="text-basic">用户:</label>
-				<input type="text" name="no" id="text-basic" value="">
+				<label for="text-basic">用户:</label> <input type="text" name="no"
+					id="text-basic" value="">
 			</p>
 			<p>
-				<label for="text-basic">名称:</label>
-				<input type="password" name="password" id="text-basic" value="">
+				<label for="text-basic">名称:</label> <input type="password"
+					name="password" id="text-basic" value="">
 			</p>
 			<p>
 				<label id="error"></label>
 			</p>
-			<a href="javascript:submit();" class="ui-btn ui-shadow ui-corner-all ui-btn-a">登录</a>
+			<a href="javascript:submit();"
+				class="ui-btn ui-shadow ui-corner-all ui-btn-a">登录</a>
 		</div>
 		<div data-role="footer" data-position="fixed">
-			<h1 class="ui-title" role="heading" aria-level="1">Copyright © 2015 AsStar</h1>
+			<h1 class="ui-title" role="heading" aria-level="1">Copyright ©
+				2015 AsStar</h1>
 		</div>
 	</div>
 </body>

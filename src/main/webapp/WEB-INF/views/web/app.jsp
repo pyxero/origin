@@ -119,7 +119,7 @@
 						          }
 
 						          ext.get({
-						            url: 'sys/menu/data',
+						            url: 's/menu/data',
 						            callback: callback
 						          });
 						          domStyle.set('preloader', 'display', 'none');
@@ -152,7 +152,7 @@
 		<div data-dojo-type="dijit/layout/BorderContainer" id="mainSplitter" data-dojo-props="liveSplitters: false, design: 'sidebar', region: 'center'">
 			<div data-dojo-type="dijit/layout/AccordionContainer" id="leftAccordion" data-dojo-props="splitter: true,minSize: 100, region: 'leading'">
 				<div data-dojo-type="dijit/layout/ContentPane" id="menu_ContentPane" data-dojo-props="title: ''">
-					<img id="loading" alt="loading" src="<%=request.getContextPath()%>/resources/ui/dojo/gridx/resources/images/loadingAnimation.gif">
+					<img id="loading" alt="loading" src="<%=request.getContextPath()%>/resources/ui/web/dojo/gridx/resources/images/loadingAnimation.gif">
 				</div>
 			</div>
 			<div data-dojo-type="dijit/layout/TabContainer" id="mainTabContainer" data-dojo-props="region: 'center'">

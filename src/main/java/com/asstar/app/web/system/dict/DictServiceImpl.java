@@ -7,8 +7,10 @@ import com.asstar.app.common.jpa.JpaServiceImpl;
 
 @Service
 public class DictServiceImpl extends JpaServiceImpl<Dict, Long>implements DictService {
+
 	@Autowired
 	public void setJpaDao(DictDao dictDao) {
 		this.jpaDao = dictDao;
 	}
+
 }
