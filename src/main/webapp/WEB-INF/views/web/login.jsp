@@ -26,15 +26,13 @@
 				<table>
 					<tr>
 						<td><label>用户名:</label></td>
-						<td><input data-dojo-id="no" type="text" name="no"
-							value="admin" required="true"
+						<td><input data-dojo-id="no" type="text" name="no" required="true"
 							data-dojo-type="dijit/form/ValidationTextBox" /></td>
 					</tr>
 					<tr>
 						<td><label>密&nbsp;&nbsp;&nbsp;码:</label></td>
-						<td><input data-dojo-id="password" type="password"
-							name="password" value="admin" required="true"
-							data-dojo-type="dijit/form/ValidationTextBox" /></td>
+						<td><input data-dojo-id="password" type="password" name="password"
+							required="true" data-dojo-type="dijit/form/ValidationTextBox" /></td>
 					</tr>
 				</table>
 			</div>
@@ -44,10 +42,10 @@
 						<td width="80%"><img id="loading" alt="loading"
 							src="<%=request.getContextPath()%>/resources/ui/web/dojo/gridx/resources/images/loadingAnimation.gif">
 							<div id="message" style="color: red; text-align: left;"></div></td>
-						<td><button data-dojo-id="submit"
-								data-dojo-type="dijit/form/Button" type="button">
+						<td><button data-dojo-id="submit" data-dojo-type="dijit/form/Button"
+								type="button">
 								登陆
-								<script  type="dojo/on" data-dojo-event="click" data-dojo-args="evt">
+								<script type="dojo/on" data-dojo-event="click" data-dojo-args="evt">
 									if (form_login.isValid()) {
 										var values = form_login.getValues();
 										dojo.forEach([ no, password, submit ],

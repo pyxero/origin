@@ -28,6 +28,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 				.hasRole("LOGIN");
 		http.formLogin().loginPage("/login").usernameParameter("no").passwordParameter("password").permitAll();
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		http.csrf().disable();
 	}
 
 	@Override

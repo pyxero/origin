@@ -9,18 +9,21 @@
 			name : "商品编号",
 			field : "no",
 			width : "100px"
-		},{
+		}, {
 			name : "商品名称",
 			field : "name",
 			width : "300px"
-		},{
+		}, {
 			name : "商品信息",
 			field : "info",
 			width : "300px"
-		},{
+		}, {
 			name : "商品图片",
 			field : "img",
-			width : "300px"
+			width : "300px",
+			decorator : function(cellData, rowId, rowIndex) {
+				return cellData.id;
+			}
 		} ];
 		model.toolbar = new dijit.Toolbar({});
 		var labels = {

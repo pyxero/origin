@@ -4,7 +4,7 @@
 
 var goods = {};
 
-goods.load = function(grid, info, url) {
+goods.load = function(grid, info, imgFile) {
 
 	var divFontP = document.createElement('div');
 	$(divFontP).addClass('app-goods-div-font-p');
@@ -16,7 +16,9 @@ goods.load = function(grid, info, url) {
 
 	var img = document.createElement('img');
 	$(img).addClass('app-goods-div-img');
-	$(img).attr('src', url);
+	var type = imgFile.name.substr(imgFile.name.substr(1).indexOf('.') + 2,
+			imgFile.name.length + 1);
+	$(img).attr('src', 'data:image/' + type + ';base64,' + imgFile.file);
 
 	var divBar = document.createElement('div');
 	$(divBar).addClass('ui-bar ui-bar-a app-goods-div');

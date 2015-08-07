@@ -9,7 +9,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -47,7 +46,7 @@ public class RootConfigurer {
 		HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		jpaVendorAdapter.setDatabase(Database.MYSQL);
 		jpaVendorAdapter.setGenerateDdl(true);
-		jpaVendorAdapter.setShowSql(true);
+		jpaVendorAdapter.setShowSql(false);
 		return jpaVendorAdapter;
 	}
 
@@ -61,7 +60,6 @@ public class RootConfigurer {
 		Properties jpaProperties = new Properties();
 		jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		entityManagerFactory.setJpaProperties(jpaProperties);
-		entityManagerFactory.afterPropertiesSet();
 		entityManagerFactory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
 		return entityManagerFactory;
 	}
