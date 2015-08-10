@@ -19,7 +19,7 @@
 			width : "300px"
 		}, {
 			name : "商品图片",
-			field : "img",
+			field : "show",
 			width : "300px",
 			decorator : function(cellData, rowId, rowIndex) {
 				return cellData.id;

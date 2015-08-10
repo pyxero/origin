@@ -4,7 +4,16 @@
 
 var goods = {};
 
-goods.load = function(grid, info, imgFile) {
+goods.active = function(target, imgFile) {
+	var img = document.createElement('img');
+	var type = imgFile.name.substr(imgFile.name.substr(1).indexOf('.') + 2,
+			imgFile.name.length + 1);
+	$(img).attr('src', 'data:image/' + type + ';base64,' + imgFile.file);
+	$(img).attr('style', 'width: 100%; height: 100%;');
+	($(target)).append(img);
+}
+
+goods.show = function(target, info, imgFile) {
 
 	var divFontP = document.createElement('div');
 	$(divFontP).addClass('app-goods-div-font-p');
@@ -30,7 +39,7 @@ goods.load = function(grid, info, imgFile) {
 	$(a).append($(divBar));
 
 	var div = document.createElement('div');
-	var l = $('div[class^=ui-block-]:last', grid)[0];
+	var l = $('div[class^=ui-block-]:last', target)[0];
 	if (typeof (l) != 'undefined' && l.className == 'ui-block-a') {
 		$(div).addClass('ui-block-b');
 	} else {
@@ -39,6 +48,6 @@ goods.load = function(grid, info, imgFile) {
 
 	$(div).append($(a));
 
-	($(grid)).append(div);
+	($(target)).append(div);
 
 };

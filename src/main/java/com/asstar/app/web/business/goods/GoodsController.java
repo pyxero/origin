@@ -40,6 +40,15 @@ public class GoodsController {
 	@ResponseBody
 	@RequestMapping(value = "/b/goods/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(Goods goods) {
+		if (goods.getDict().getId() == null) {
+			goods.setDict(null);
+		}
+		if (goods.getShow().getId() == null) {
+			goods.setShow(null);
+		}
+		if (goods.getActive().getId() == null) {
+			goods.setActive(null);
+		}
 		return JsonUtil.toString(ResultUtil.set(goodsService.save(goods)));
 	}
 
