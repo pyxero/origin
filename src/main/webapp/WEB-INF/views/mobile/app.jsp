@@ -64,18 +64,18 @@
 										response[int].active);
 							}
 							$('#app-active').nivoSlider();
-						}
-					});
-					$.ajax({
-						url : 'b/goods/data',
-						dataType : 'json',
-						success : function(response) {
-							for (var int = 0; int < response.length; int++) {
-								goods
-										.show('#app-show', response[int].show,
-												response[int].info,
-												response[int].price);
-							}
+							$.ajax({
+								url : 'b/goods/data',
+								dataType : 'json',
+								success : function(response) {
+									for (var int = 0; int < response.length; int++) {
+										goods
+												.show('#app-show', response[int].show,
+														response[int].info,
+														response[int].price);
+									}
+								}
+							});
 						}
 					});
 				});
