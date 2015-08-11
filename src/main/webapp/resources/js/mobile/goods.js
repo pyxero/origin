@@ -9,19 +9,23 @@ goods.active = function(target, imgFile) {
 	var type = imgFile.name.substr(imgFile.name.substr(1).indexOf('.') + 2,
 			imgFile.name.length + 1);
 	$(img).attr('src', 'data:image/' + type + ';base64,' + imgFile.file);
-	$(img).attr('style', 'width: 100%; height: 100%;');
-	($(target)).append(img);
+	($(target)).prepend(img);
 }
 
-goods.show = function(target, info, imgFile) {
+goods.show = function(target, imgFile, info, price) {
 
-	var divFontP = document.createElement('div');
-	$(divFontP).addClass('app-goods-div-font-p');
-	divFontP.innerHTML = info;
+	var divDescribe = document.createElement('div');
+	$(divDescribe).addClass('app-goods-div-info-describe');
+	divDescribe.innerHTML = info;
 
-	var divFont = document.createElement('div');
-	$(divFont).addClass('app-goods-div-font-div');
-	$(divFont).append($(divFontP));
+	var divPrice = document.createElement('div');
+	$(divPrice).addClass('app-goods-div-info-price');
+	divPrice.innerHTML = price == null ? '预售' : '￥' + price.toFixed(2);
+
+	var divInfo = document.createElement('div');
+	$(divInfo).addClass('app-goods-div-info');
+	$(divInfo).append($(divDescribe));
+	$(divInfo).append($(divPrice));
 
 	var img = document.createElement('img');
 	$(img).addClass('app-goods-div-img');
@@ -32,7 +36,7 @@ goods.show = function(target, info, imgFile) {
 	var divBar = document.createElement('div');
 	$(divBar).addClass('ui-bar ui-bar-a app-goods-div');
 	$(divBar).append($(img));
-	$(divBar).append($(divFont));
+	$(divBar).append($(divInfo));
 
 	var a = document.createElement('a');
 	$(a).addClass('app-goods-div-a');

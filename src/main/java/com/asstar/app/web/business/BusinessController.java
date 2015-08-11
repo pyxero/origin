@@ -28,14 +28,14 @@ public class BusinessController {
 	private FilesService filesService;
 
 	@ResponseBody
-	@RequestMapping(value = "/b/goods/data", method = RequestMethod.GET)
+	@RequestMapping(value = "/b/goods/data", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String Data(PageEntity pEntity, Goods goods) {
 		Page<Goods> page = goodsService.page(goods, pEntity, Dict.class);
 		return JsonUtil.toString(page.getContent());
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/b/goods/uploadedfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/b/goods/uploadedfile", method = RequestMethod.POST, produces = "application/json;text/html;charset=UTF-8")
 	public boolean uploadedfile(@RequestParam(value = "files[]") MultipartFile[] files) throws IOException, Exception {
 		for (int i = 0; i < files.length; i++) {
 			Files file = new Files();

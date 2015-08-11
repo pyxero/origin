@@ -6,31 +6,9 @@
 <title>mobile</title>
 <%@ include file="../common/mobile/lib.jsp"%>
 <script type="text/javascript">
-	$().ready(
-			function() {
-				$('#search').parent().removeClass('ui-body-inherit');
-				$('#search').parent().addClass('app-search-alpha');
-				$.ajax({
-					url : 'b/goods/data?dict.id=4',
-					dataType : 'json',
-					success : function(response) {
-						for (var int = 0; int < response.length; int++) {
-							goods.active('#app-active', response[int].active);
-						}
-					}
-				});
-				$.ajax({
-					url : 'b/goods/data?',
-					dataType : 'json',
-					success : function(response) {
-						for (var int = 0; int < response.length; int++) {
-							goods.show('#app-show', response[int].info,
-									response[int].show);
-						}
-					}
-				});
+	$().ready(function() {
 
-			});
+	});
 </script>
 </head>
 <body>
@@ -41,7 +19,9 @@
 		</div>
 		<div role="main"
 			style="width: 100%; height: 82%; position: absolute; z-index: 999; top: 0; bottom: 0;">
-			<div id="app-active" style="width: 100%; height: 50%;"></div>
+			<div class="slider-wrapper theme-default" style="width: 100%; height: 50%;">
+				<div id="app-active" class="nivoSlider" style="width: 100%; height: 100%;"></div>
+			</div>
 			<div id="app-show" class="ui-grid-a" style="padding: 1 1 1 1;"></div>
 			<div style="height: 90px; background-color: white;">&nbsp;</div>
 		</div>
@@ -70,5 +50,35 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(window).load(
+				function() {
+					$('#search').parent().removeClass('ui-body-inherit');
+					$('#search').parent().addClass('app-search-alpha');
+					$.ajax({
+						url : 'b/goods/data?dict.id=4',
+						dataType : 'json',
+						success : function(response) {
+							for (var int = 0; int < response.length; int++) {
+								goods.active('#app-active',
+										response[int].active);
+							}
+							$('#app-active').nivoSlider();
+						}
+					});
+					$.ajax({
+						url : 'b/goods/data',
+						dataType : 'json',
+						success : function(response) {
+							for (var int = 0; int < response.length; int++) {
+								goods
+										.show('#app-show', response[int].show,
+												response[int].info,
+												response[int].price);
+							}
+						}
+					});
+				});
+	</script>
 </body>
 </html>

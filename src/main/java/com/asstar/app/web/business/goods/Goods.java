@@ -1,5 +1,7 @@
 package com.asstar.app.web.business.goods;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -13,6 +15,7 @@ public class Goods extends JpaEntity {
 
 	public String name;
 	public String info;
+	public BigDecimal price;
 	@OneToOne
 	@JoinColumn(name = "show_id")
 	public Files show;
@@ -37,6 +40,14 @@ public class Goods extends JpaEntity {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public Files getShow() {
