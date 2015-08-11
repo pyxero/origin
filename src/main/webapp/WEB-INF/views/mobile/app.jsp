@@ -5,22 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mobile</title>
 <%@ include file="../common/mobile/lib.jsp"%>
-<script type="text/javascript">
-	$().ready(function() {
-
-	});
-</script>
 </head>
 <body>
-	<div data-role="page" style="background-color: white; width: 100%; height: 100%;">
+	<div id="app-page" data-role="page"
+		style="background-color: white; width: 100%; height: 100%;">
 		<div data-role="header" data-position="fixed" data-tap-toggle="false"
 			style="width: 100%; height: 8%; background: none; border: 0px;">
-			<input id="search" type="search" value="" style="width: 100%; height: 100%;">
+			<input id="app-page-search" type="search" value="" style="width: 100%; height: 100%;">
 		</div>
 		<div role="main"
 			style="width: 100%; height: 82%; position: absolute; z-index: 999; top: 0; bottom: 0;">
-			<div class="slider-wrapper theme-default" style="width: 100%; height: 50%;">
-				<div id="app-active" class="nivoSlider" style="width: 100%; height: 100%;"></div>
+			<div class="slider-wrapper theme-default">
+				<div id="app-active" class="nivoSlider"></div>
 			</div>
 			<div id="app-show" class="ui-grid-a" style="padding: 1 1 1 1;"></div>
 			<div style="height: 90px; background-color: white;">&nbsp;</div>
@@ -50,35 +46,68 @@
 			</div>
 		</div>
 	</div>
+	<div id="app-hote" data-role="page" style="width: 100%; height: 100%;">
+		<div data-role="header" data-position="fixed" data-tap-toggle="false"
+			style="width: 100%; height: 40px; background: none; border: 0px;">
+			<input id="app-hote-search" type="search" value="" style="width: 100%; height: 100%;">
+		</div>
+		<div role="main" style="width: 100%;">
+			<p>热门搜索</p>
+			<p>电器、化妆品</p>
+		</div>
+	</div>
 	<script type="text/javascript">
-		$(window).load(
-				function() {
-					$('#search').parent().removeClass('ui-body-inherit');
-					$('#search').parent().addClass('app-search-alpha');
-					$.ajax({
-						url : 'b/goods/data?dict.id=4',
-						dataType : 'json',
-						success : function(response) {
-							for (var int = 0; int < response.length; int++) {
-								goods.active('#app-active',
-										response[int].active);
-							}
-							$('#app-active').nivoSlider();
-							$.ajax({
-								url : 'b/goods/data',
-								dataType : 'json',
-								success : function(response) {
-									for (var int = 0; int < response.length; int++) {
-										goods
-												.show('#app-show', response[int].show,
-														response[int].info,
-														response[int].price);
-									}
-								}
-							});
-						}
-					});
-				});
-	</script>
+	$()
+		.ready(
+			function() {
+			    $
+				    .ajax({
+					url : 'b/goods/data?dict.id=4',
+					dataType : 'json',
+					success : function(response) {
+					    for (var int = 0; int < response.length; int++) {
+						goods.active('#app-active',
+							response[int].active);
+					    }
+					    $('#app-active').nivoSlider({
+						directionNav : false,
+						controlNav : false
+					    });
+					}
+				    });
+			    $
+				    .ajax({
+					url : 'b/goods/data',
+					dataType : 'json',
+					success : function(response) {
+					    for (var int = 0; int < response.length; int++) {
+						goods.show('#app-show',
+							response[int].show,
+							response[int].info,
+							response[int].price);
+					    }
+					}
+				    });
+			    $('#app-page-search').parent().removeClass(
+				    'ui-body-inherit');
+			    $('#app-page-search').parent().addClass(
+				    'app-search-alpha');
+			    $('#app-page-search').focus(function() {
+				$('#app-page').hide();
+				$('#app-hote').show();
+				$('#app-hote-search').focus();
+			    });
+			    $("#app-hote-search").keydown(function(event) {
+				if (event.keyCode == 13) {
+				    $('#app-page').show();
+				    $('#app-hote').hide();
+				}
+			    });
+			    $('#app-hote-search').blur(function() {
+				$('#app-page').show();
+				$('#app-hote').hide();
+			    });
+			});
+    </script>
 </body>
 </html>
