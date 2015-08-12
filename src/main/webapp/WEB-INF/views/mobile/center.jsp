@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>favorites</title>
+<title>center</title>
 <%@ include file="../common/mobile/lib.jsp"%>
 </head>
 <body>
@@ -13,7 +13,7 @@
 			<div data-role="navbar" class="ui-navbar" role="navigation">
 				<ul class="ui-grid-b">
 					<li class="ui-block-a">
-						<a href="<%=request.getContextPath()%>" target="_top" data-icon="home"
+						<a href="<%=request.getContextPath()%>/" target="_top" data-icon="home"
 							class="ui-link ui-btn ui-icon-home ui-btn-icon-top" style="font-size: 16px;">首页</a>
 					</li>
 					<!-- ui-btn-active -->
