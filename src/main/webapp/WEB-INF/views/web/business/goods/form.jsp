@@ -1,20 +1,20 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <script type="text/javascript">
-	require([ 'dijit/form/Form', 'ext/core' ], function(form, ext) {
-		var dialog = dijit.byId('G_goods_D');
-		if (dialog.ext.type == 1) {
-			var callback = function(data) {
-				G_goods_F.setValues(data);
-			};
-			ext.get({
-				url : 'b/goods/find',
-				content : {
-					id : dijit.byId('G_goods_D').ext.select
-				},
-				callback : callback
-			});
-		}
-	});
+    require([ 'dijit/form/Form', 'ext/core' ], function(form, ext) {
+	var dialog = dijit.byId('G_goods_D');
+	if (dialog.ext.type == 1) {
+	    var callback = function(data) {
+		G_goods_F.setValues(data);
+	    };
+	    ext.get({
+		url : 'b/goods/find',
+		content : {
+		    id : dijit.byId('G_goods_D').ext.select
+		},
+		callback : callback
+	    });
+	}
+    });
 </script>
 <div data-dojo-id="G_goods_F" data-dojo-type="dijit/form/Form"
 	encType="multipart/form-data">
@@ -23,26 +23,31 @@
 		<tr>
 			<td><label>商品编号:</label></td>
 			<td><input type="text" name="no" data-dojo-type="dijit/form/ValidationTextBox"
-					data-dojo-props="required:true" /></td>
+				data-dojo-props="required:true" /></td>
 			<td><label>商品名称:</label></td>
 			<td><input type="text" name="name" data-dojo-type="dijit/form/ValidationTextBox"
-					data-dojo-props="required:true" /></td>
+				data-dojo-props="required:true" /></td>
 		</tr>
 		<tr>
 			<td><label>商品信息:</label></td>
 			<td><input type="text" name="info" data-dojo-type="dijit/form/ValidationTextBox"
-					data-dojo-props="required:true" /></td>
+				data-dojo-props="required:true" /></td>
 			<td><label>商品展示:</label></td>
-			<td><input type="text" name="show.id" data-dojo-type="dijit/form/ValidationTextBox"
-					data-dojo-props="required:true" /></td>
+			<td><input type="text" name="show.id"
+				data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>
+		</tr>
+		<tr>
+			<td><label>商品价格:</label></td>
+			<td><input type="text" name="price" data-dojo-type="dijit/form/ValidationTextBox"
+				data-dojo-props="required:false" /></td>
 		</tr>
 		<tr>
 			<td><label>活动:</label></td>
 			<td><input type="text" name="dict.id"
-					data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>
+				data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>
 			<td><label>当前:</label></td>
 			<td><input type="text" name="active.id"
-					data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:false" /></td>
+				data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:false" /></td>
 		</tr>
 		<input type="hidden" name="version" data-dojo-type="dijit/form/ValidationTextBox"
 			data-dojo-props="value:0" />
@@ -52,10 +57,10 @@
 					enctype="multipart/form-data">
 					<fieldset>
 						<legend>show上传</legend>
-						<input type="hidden" name="type" value="0">
-						<input name="file" multiple="true" type="file" id="show_uploader"
-							data-dojo-type="dojox/form/Uploader" data-dojo-props="label: 'Select'">
-						<input type="submit" label="Submit" data-dojo-type="dijit/form/Button">
+						<input type="hidden" name="type" value="0"> <input name="file"
+							multiple="true" type="file" id="show_uploader" data-dojo-type="dojox/form/Uploader"
+							data-dojo-props="label: 'Select'"> <input type="submit" label="Submit"
+							data-dojo-type="dijit/form/Button">
 						<div data-dojo-type="dojox/form/uploader/FileList"
 							data-dojo-props="uploaderId: 'show_uploader'"></div>
 					</fieldset>
@@ -68,10 +73,10 @@
 					enctype="multipart/form-data">
 					<fieldset>
 						<legend>active上传</legend>
-						<input type="hidden" name="type" value="1">
-						<input name="file" multiple="true" type="file" id="active_uploader"
-							data-dojo-type="dojox/form/Uploader" data-dojo-props="label: 'Select'">
-						<input type="submit" label="Submit" data-dojo-type="dijit/form/Button">
+						<input type="hidden" name="type" value="1"> <input name="file"
+							multiple="true" type="file" id="active_uploader"
+							data-dojo-type="dojox/form/Uploader" data-dojo-props="label: 'Select'"> <input
+							type="submit" label="Submit" data-dojo-type="dijit/form/Button">
 						<div data-dojo-type="dojox/form/uploader/FileList"
 							data-dojo-props="uploaderId: 'active_uploader'"></div>
 					</fieldset>

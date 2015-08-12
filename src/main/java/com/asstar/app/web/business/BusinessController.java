@@ -28,7 +28,7 @@ public class BusinessController {
 	private FilesService filesService;
 
 	@ResponseBody
-	@RequestMapping(value = "/b/goods/data", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
+	@RequestMapping(value = "/show/goods/data", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String Data(PageEntity pEntity, Goods goods) {
 		Page<Goods> page = goodsService.page(goods, pEntity, Dict.class);
 		return JsonUtil.toString(page.getContent());

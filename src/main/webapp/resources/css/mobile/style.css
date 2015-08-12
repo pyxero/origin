@@ -8,14 +8,14 @@
 }
 
 .app-goods-div {
-	height: 40%;
+	height: 45%;
 	background: white;
 	text-align: center;
 }
 
 .app-goods-div-img {
 	width: 100%;
-	height: 80%;
+	height: 75%;
 }
 
 .app-goods-div-a {
@@ -24,7 +24,7 @@
 
 .app-goods-div-info {
 	width: 100%;
-	height: 20%;
+	height: 25%;
 }
 
 .app-goods-div-info-describe {
@@ -32,6 +32,7 @@
 	font-size: 13px;
 	font: 13px/15px Arial, Helvetica, sans-serif;
 	color: #9D9D9D;
+	height: 75%;
 }
 
 .app-goods-div-info-price {
@@ -39,4 +40,5 @@
 	font-size: 13px;
 	font: 13px/15px Arial, Helvetica, sans-serif;
 	color: red;
+	height: 25%;
 }

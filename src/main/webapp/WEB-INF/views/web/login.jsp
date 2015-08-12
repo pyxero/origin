@@ -62,7 +62,7 @@
 													load : function(data) {
 														if (data.flag) {
 															pathname = document.location.pathname;
-															path = pathname.substr(0,pathname.substr(1).indexOf('/') + 1);
+															path = pathname.substr(0,pathname.substr(1).indexOf('/') + 1)+'/smcp';
 															if (path == '') {
 																path = '/'
 															}

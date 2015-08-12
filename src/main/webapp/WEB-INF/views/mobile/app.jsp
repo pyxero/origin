@@ -21,8 +21,8 @@
 			<div id="app-show" class="ui-grid-a" style="padding: 1 1 1 1;"></div>
 			<div style="height: 90px; background-color: white;">&nbsp;</div>
 		</div>
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b"
-			style="height: 10%;">
+		<div data-role="footer" data-position="fixed" data-tap-toggle="false"
+			style="height: 10%;" data-theme="b">
 			<div data-role="navbar" class="ui-navbar" role="navigation">
 				<ul class="ui-grid-b">
 					<li class="ui-block-a">
@@ -62,7 +62,7 @@
 			function() {
 			    $
 				    .ajax({
-					url : 'b/goods/data?dict.id=4',
+					url : 'show/goods/data?dict.id=4',
 					dataType : 'json',
 					success : function(response) {
 					    for (var int = 0; int < response.length; int++) {
@@ -77,7 +77,7 @@
 				    });
 			    $
 				    .ajax({
-					url : 'b/goods/data',
+					url : 'show/goods/data',
 					dataType : 'json',
 					success : function(response) {
 					    for (var int = 0; int < response.length; int++) {

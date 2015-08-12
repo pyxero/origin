@@ -47,15 +47,26 @@ public class HomeController {
 		model.addAttribute("device", sitePreference);
 
 		if (sitePreference == SitePreference.NORMAL) {
-			logger.info("Site preference is normal");
+			return "login";
 		} else if (sitePreference == SitePreference.MOBILE) {
-			logger.info("Site preference is mobile");
+			return "app";
 		} else if (sitePreference == SitePreference.TABLET) {
-			logger.info("Site preference is tablet");
+			return "app";
 		} else {
-			logger.info("no site preference");
+			return "app";
 		}
-		return "app";
+
+	}
+
+	@RequestMapping(value = "/smcp", method = RequestMethod.GET)
+	public String smcp(SitePreference sitePreference, Locale locale, Model model) {
+
+		if (sitePreference == SitePreference.NORMAL) {
+			return "app";
+		} else {
+			return "login";
+		}
+
 	}
 
 	@RequestMapping(value = "/path", method = RequestMethod.GET)
