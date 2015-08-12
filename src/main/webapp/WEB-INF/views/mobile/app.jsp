@@ -26,21 +26,21 @@
 			<div data-role="navbar" class="ui-navbar" role="navigation">
 				<ul class="ui-grid-b">
 					<li class="ui-block-a">
-						<a href="#" data-icon="home" class="ui-link ui-btn ui-icon-home ui-btn-icon-top"
+						<a href="/app" target="_top" data-icon="home" class="ui-link ui-btn ui-icon-home ui-btn-icon-top"
 							style="font-size: 16px;">首页</a>
 					</li>
 					<!-- ui-btn-active -->
 					<li class="ui-block-b">
-						<a href="#" data-icon="star" class="ui-link ui-btn ui-icon-star ui-btn-icon-top"
-							style="font-size: 16px;">收藏</a>
+						<a href="path?url=mobile/favorites" data-icon="star"
+							class="ui-link ui-btn ui-icon-star ui-btn-icon-top" style="font-size: 16px;">收藏</a>
 					</li>
 					<li class="ui-block-c">
-						<a href="#" data-icon="grid" class="ui-link ui-btn ui-icon-grid ui-btn-icon-top"
-							style="font-size: 16px;">购物车</a>
+						<a href="path?url=mobile/trolleys" data-icon="grid"
+							class="ui-link ui-btn ui-icon-grid ui-btn-icon-top" style="font-size: 16px;">购物车</a>
 					</li>
 					<li class="ui-block-d">
-						<a href="#" data-icon="user" class="ui-link ui-btn ui-icon-user ui-btn-icon-top"
-							style="font-size: 16px;">我的</a>
+						<a href="path?url=mobile/center" data-icon="user"
+							class="ui-link ui-btn ui-icon-user ui-btn-icon-top" style="font-size: 16px;">我的</a>
 					</li>
 				</ul>
 			</div>
