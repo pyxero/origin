@@ -31,7 +31,7 @@ public class BusinessController {
 	@RequestMapping(value = "/show/goods/data", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String Data(PageEntity pEntity, Goods goods) {
 		Page<Goods> page = goodsService.page(goods, pEntity, Dict.class);
-		return JsonUtil.toString(page.getContent());
+		return "{\"count\":" + page.getTotalElements() + ",\"data\":" + JsonUtil.toString(page.getContent()) + "}";
 	}
 
 	@ResponseBody

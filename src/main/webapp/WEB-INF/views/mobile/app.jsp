@@ -19,7 +19,10 @@
 				<div id="app-active" class="nivoSlider"></div>
 			</div>
 			<div id="app-show" class="ui-grid-a" style="padding: 1 1 1 1;"></div>
-			<div style="height: 90px; background-color: white;">&nbsp;</div>
+			<button id="app-more" style="height: 40px; width: 100%; display: none; color: #9D9D9D;"
+				class="show-page-loading-msg" data-textonly="false" data-textvisible="false"
+				data-msgtext="" data-inline="true" onclick="more('#app-show')">加载更多</button>
+			<div style="height: 70px;">&nbsp;</div>
 		</div>
 		<div data-role="footer" data-position="fixed" data-tap-toggle="false"
 			style="height: 10%;" data-theme="b">
@@ -57,17 +60,47 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	function more(target) {
+	    var count = $('div[class^=ui-block-]', target).length;
+	    var start = 1;
+	    if (count > 6) {
+		start = (count % 6);
+	    }
+	    $
+		    .ajax({
+			url : 'show/goods/data?count=6&start=' + start,
+			dataType : 'json',
+			success : function(response) {
+			    for (var int = 0; int < response.data.length; int++) {
+				goods.show('#app-show',
+					response.data[int].show,
+					response.data[int].info,
+					response.data[int].price);
+			    }
+			    console
+				    .log($('div[class^=ui-block-]', target).length);
+			    console.log(response.count);
+			    if ($('div[class^=ui-block-]', target).length == response.count) {
+				$('#app-more').css('display', 'none');
+			    } else {
+				$('#app-more').css('display', 'block');
+			    }
+			}
+		    });
+	}
 	$()
 		.ready(
 			function() {
 			    $
 				    .ajax({
-					url : 'show/goods/data?dict.id=4',
+					url : 'show/goods/data?dict.id=4&count=6&start=0',
 					dataType : 'json',
 					success : function(response) {
-					    for (var int = 0; int < response.length; int++) {
-						goods.active('#app-active',
-							response[int].active);
+					    for (var int = 0; int < response.data.length; int++) {
+						goods
+							.active(
+								'#app-active',
+								response.data[int].active);
 					    }
 					    $('#app-active').nivoSlider({
 						directionNav : false,
@@ -77,14 +110,24 @@
 				    });
 			    $
 				    .ajax({
-					url : 'show/goods/data',
+					url : 'show/goods/data?count=6&start=0',
 					dataType : 'json',
 					success : function(response) {
-					    for (var int = 0; int < response.length; int++) {
-						goods.show('#app-show',
-							response[int].show,
-							response[int].info,
-							response[int].price);
+					    for (var int = 0; int < response.data.length; int++) {
+						goods
+							.show(
+								'#app-show',
+								response.data[int].show,
+								response.data[int].info,
+								response.data[int].price);
+					    }
+					    if ($('div[class^=ui-block-]',
+						    '#app-show').length == response.count) {
+						$('#app-more').css('display',
+							'none');
+					    } else {
+						$('#app-more').css('display',
+							'block');
 					    }
 					}
 				    });
