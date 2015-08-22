@@ -5,8 +5,10 @@
 <script>
 	dojoConfig = {
 		has : {
-			'dojo-firebug' : true
+			"dojo-firebug" : true
 		},
+		parseOnLoad : false,
+		foo : "bar",
 		async : true
 	};
 </script>
@@ -14,7 +16,8 @@
 <script type="text/javascript">
 	require([ 'dojo' ], function(dojo) {
 		pathname = document.location.pathname;
-		path = pathname.substr(0, pathname.substr(1).indexOf('/') + 1) + '/resources/ui/web/dojo/ext'
+		path = pathname.substr(0, pathname.substr(1).indexOf('/') + 1)
+				+ '/resources/ui/web/dojo/ext'
 		dojo.registerModulePath('ext', path);
 	});
 </script>

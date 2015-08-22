@@ -1,42 +1,4 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-<script type="text/javascript">
-	require([ 'dijit/form/Form', 'ext/core' ], function(Form, ext) {
-		dojo.forEach([ 'enabled', 'credentialsNonExpired', 'accountNonLocked', 'accountNonExpired' ], function(w) {
-			var ds = ext.form.dSelect({
-				name : w
-			}, dojo.query('input[name=\'' + w + '\']', dijit.byId('G_user_D').domNode)[0]);
-			var data = w == 'enabled' ? [ {
-				id : true,
-				name : '是'
-			}, {
-				id : false,
-				name : '否'
-			} ] : [ {
-				id : false,
-				name : '是'
-			}, {
-				id : true,
-				name : '否'
-			} ];
-			ds.store = new dojo.store.Memory({
-				data : data
-			});
-		});
-		var dialog = dijit.byId('G_user_D');
-		if (dialog.ext.type == 1) {
-			var callback = function(data) {
-				G_user_F.setValues(data);
-			};
-			ext.get({
-				url : 's/user/find',
-				content : {
-					id : dijit.byId('G_user_D').ext.select
-				},
-				callback : callback
-			});
-		}		
-	});
-</script>
 <div data-dojo-id="G_user_F" data-dojo-type="dijit/form/Form" encType="multipart/form-data">
 	<table class="dijitDialogPaneContentArea" cellspacing="8">
 		<tr>
@@ -45,11 +7,13 @@
 			<input type="hidden" name="version" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="value:0" />
 			<td><input type="text" name="no" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>
 			<td><label>用户姓名:</label></td>
-			<td><input type="text" name="username" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="required:true" /></td>			
+			<td><input type="text" name="username" data-dojo-type="dijit/form/ValidationTextBox"
+				data-dojo-props="required:true" /></td>
 		</tr>
 		<tr>
 			<td><label>账户可用:</label></td>
-			<td><input type="text" name="enabled" data-dojo-type="dijit/form/FilteringSelect" data-dojo-props="required:false" /></td>
+			<td><input type="text" name="enabled" data-dojo-type="dijit/form/FilteringSelect"
+				data-dojo-props="required:false" /></td>
 			<td><label>账户过期:</label></td>
 			<td><input type="text" name="accountNonExpired" data-dojo-type="dijit/form/FilteringSelect"
 				data-dojo-props="required:false" /></td>
@@ -96,3 +60,47 @@
 		</button>
 	</div>
 </div>
+<script type="text/javascript">
+	$().ready(
+			function() {
+				require([ 'dijit/form/Form', 'ext/core' ], function(Form, ext) {
+					dojo.forEach([ 'enabled', 'credentialsNonExpired',
+							'accountNonLocked', 'accountNonExpired' ],
+							function(w) {
+								var ds = ext.form.dSelect({
+									name : w
+								}, dojo.query('input[name=\'' + w + '\']',
+										dijit.byId('G_user_D').domNode)[0]);
+								var data = w == 'enabled' ? [ {
+									id : true,
+									name : '是'
+								}, {
+									id : false,
+									name : '否'
+								} ] : [ {
+									id : false,
+									name : '是'
+								}, {
+									id : true,
+									name : '否'
+								} ];
+								ds.store = new dojo.store.Memory({
+									data : data
+								});
+							});
+					var dialog = dijit.byId('G_user_D');
+					if (dialog.ext.type == 1) {
+						var callback = function(data) {
+							G_user_F.setValues(data);
+						};
+						ext.get({
+							url : 's/user/find',
+							content : {
+								id : dijit.byId('G_user_D').ext.select
+							},
+							callback : callback
+						});
+					}
+				});
+			});
+</script>

@@ -110,7 +110,7 @@
 				}
 			}
 			if (type == 'Edit') {
-				id = ext.gridx.select({
+				var id = ext.gridx.select({
 					id : 'G_user'
 				});
 				if (typeof id == 'undefined' || id == '') {

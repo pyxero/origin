@@ -19,20 +19,20 @@
 </script>
 </head>
 <body class="claro">
-	<div data-dojo-id="dialog_login" data-dojo-type="dijit/Dialog"
-		data-dojo-props="title:'',closable:false" style="display: none">
+	<div data-dojo-id="dialog_login" data-dojo-type="dijit/Dialog" data-dojo-props="title:'',closable:false"
+		style="display: none">
 		<form data-dojo-id="form_login" data-dojo-type="dijit/form/Form">
 			<div class="dijitDialogPaneContentArea">
 				<table>
 					<tr>
 						<td><label>用户名:</label></td>
-						<td><input data-dojo-id="no" type="text" name="no" required="true"
+						<td><input data-dojo-id="no" type="text" name="no" required="true" value="admin"
 							data-dojo-type="dijit/form/ValidationTextBox" /></td>
 					</tr>
 					<tr>
 						<td><label>密&nbsp;&nbsp;&nbsp;码:</label></td>
-						<td><input data-dojo-id="password" type="password" name="password"
-							required="true" data-dojo-type="dijit/form/ValidationTextBox" /></td>
+						<td><input data-dojo-id="password" type="password" name="password" required="true" value="admin"
+							data-dojo-type="dijit/form/ValidationTextBox" /></td>
 					</tr>
 				</table>
 			</div>
@@ -42,8 +42,7 @@
 						<td width="80%"><img id="loading" alt="loading"
 							src="<%=request.getContextPath()%>/resources/ui/web/dojo/gridx/resources/images/loadingAnimation.gif">
 							<div id="message" style="color: red; text-align: left;"></div></td>
-						<td><button data-dojo-id="submit" data-dojo-type="dijit/form/Button"
-								type="button">
+						<td><button data-dojo-id="submit" data-dojo-type="dijit/form/Button" type="button">
 								登陆
 								<script type="dojo/on" data-dojo-event="click" data-dojo-args="evt">
 									if (form_login.isValid()) {

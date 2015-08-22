@@ -1,4 +1,6 @@
-define('ext/tree', [ 'dojo/data/ItemFileReadStore', 'dijit/tree/ForestStoreModel', 'dijit/Tree' ], function(ItemFileReadStore, ForestStoreModel, Tree) {
+define('ext/tree', [ 'dojo/data/ItemFileReadStore',
+		'dijit/tree/ForestStoreModel', 'dijit/Tree' ], function(
+		ItemFileReadStore, ForestStoreModel, Tree) {
 
 	var tree = {};
 
@@ -23,7 +25,8 @@ define('ext/tree', [ 'dojo/data/ItemFileReadStore', 'dijit/tree/ForestStoreModel
 			var org = list[int];
 			if (org.organization == null || org.organization.id == null) {
 				var node = {};
-				node.id = org.id, node.no = org.no, node.name = org.name;
+				node.id = org.id, node.no = org.no, node.name = org.name,
+						node.url = org.url;
 				array.push(child(node, list));
 			}
 		}
@@ -55,12 +58,17 @@ define('ext/tree', [ 'dojo/data/ItemFileReadStore', 'dijit/tree/ForestStoreModel
 					title : model.name || '',
 					model : treeModel,
 					showRoot : false,
-					name : model.name
+					name : model.name,
+					onClick : function(item) {
+						model.click(item);
+					}
 				});
-				var div = typeof widget != 'string' ? widget : dojo.query('input[name=' + widget + ']')[0];
+				var div = typeof widget != 'string' ? widget : dojo
+						.query('div[name=' + widget + ']')[0];
 				div.innerHTML = '<div></div>';
 				tree.placeAt((div.childNodes)[0], 'replace').startup();
-				typeof model.callback != 'undefined' ? model.callback(tree, result) : '';
+				typeof model.callback != 'undefined' ? model.callback(tree,
+						result) : '';
 			}
 		});
 	}

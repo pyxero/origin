@@ -36,12 +36,17 @@ public class BusinessController {
 
 	@ResponseBody
 	@RequestMapping(value = "/b/goods/uploadedfile", method = RequestMethod.POST, produces = "application/json;text/html;charset=UTF-8")
-	public boolean uploadedfile(@RequestParam(value = "files[]") MultipartFile[] files) throws IOException, Exception {
+	public boolean uploadedfile(@RequestParam(value = "files[]") MultipartFile[] files, MultipartFile file)
+			throws IOException, Exception {
+		if (file != null) {
+			MultipartFile[] fs = { file };
+			files = fs;
+		}
 		for (int i = 0; i < files.length; i++) {
-			Files file = new Files();
-			file.setName(files[i].getOriginalFilename());
-			file.setFile(FileUtil.getByte(files[i].getInputStream()));
-			filesService.save(file);
+			Files f = new Files();
+			f.setName(files[i].getOriginalFilename());
+			f.setFile(FileUtil.getByte(files[i].getInputStream()));
+			filesService.save(f);
 		}
 		return true;
 	}

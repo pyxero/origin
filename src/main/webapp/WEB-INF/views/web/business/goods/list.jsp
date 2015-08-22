@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <script type="text/javascript">
 	require([ 'ext/core' ], function(ext) {
 		var model = {
@@ -6,24 +6,13 @@
 			url : 'b/goods/list'
 		};
 		model.structure = [ {
-			name : "商品编号",
-			field : "no",
-			width : "100px"
-		}, {
-			name : "商品名称",
-			field : "name",
-			width : "300px"
-		}, {
-			name : "商品信息",
-			field : "info",
-			width : "300px"
-		}, {
-			name : "商品图片",
-			field : "show",
-			width : "300px",
-			decorator : function(cellData, rowId, rowIndex) {
-				return cellData.id;
-			}
+			name : '商品编号',
+			field : 'no',
+			width : '120px'
+		},{
+			name : '商品名称',
+			field : 'name',
+			width : '120px'
 		} ];
 		model.toolbar = new dijit.Toolbar({});
 		var labels = {
