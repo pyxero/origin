@@ -43,7 +43,7 @@ public class DictController {
 		if (dict.getDict().getId() == null) {
 			dict.setDict(null);
 		}
-		return JsonUtil.toString(ResultUtil.set(dictService.save(dict)));
+		return JsonUtil.toString(ResultUtil.set(dictService.save(dict) != null ? true : false));
 	}
 
 	@ResponseBody

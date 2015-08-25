@@ -49,7 +49,7 @@ public class GoodsController {
 		if (goods.getActive().getId() == null) {
 			goods.setActive(null);
 		}
-		return JsonUtil.toString(ResultUtil.set(goodsService.save(goods)));
+		return JsonUtil.toString(ResultUtil.set(goodsService.save(goods) != null ? true : false));
 	}
 
 	@ResponseBody

@@ -16,7 +16,7 @@ public interface JpaService<M> {
 
 	public M findByNo(String no);
 
-	public boolean save(M m);
+	public M save(M m);
 
 	public boolean delete(M m);
 

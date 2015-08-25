@@ -65,12 +65,11 @@ public abstract class JpaServiceImpl<M, ID extends Serializable> implements JpaS
 		}
 	}
 
-	public boolean save(M m) {
+	public M save(M m) {
 		try {
-			jpaDao.save(m);
-			return true;
+			return jpaDao.save(m);
 		} catch (Exception e) {
-			return true;
+			return null;
 		}
 	}
 

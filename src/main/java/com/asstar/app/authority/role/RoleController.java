@@ -40,7 +40,7 @@ public class RoleController {
 	@ResponseBody
 	@RequestMapping(value = "/s/role/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(Role role) {
-		return JsonUtil.toString(ResultUtil.set(roleService.save(role)));
+		return JsonUtil.toString(ResultUtil.set(roleService.save(role) != null ? true : false));
 	}
 
 	@ResponseBody

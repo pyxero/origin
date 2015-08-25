@@ -9,7 +9,7 @@
 			name : '商品编号',
 			field : 'no',
 			width : '120px'
-		},{
+		}, {
 			name : '商品名称',
 			field : 'name',
 			width : '120px'

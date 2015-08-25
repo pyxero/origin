@@ -40,7 +40,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/s/user/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(User user) {
-		return JsonUtil.toString(ResultUtil.set(userService.save(user)));
+		return JsonUtil.toString(ResultUtil.set(userService.save(user) != null ? true : false));
 	}
 
 	@ResponseBody

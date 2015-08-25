@@ -17,17 +17,16 @@ public class UserServiceImpl extends JpaServiceImpl<User, Long>implements UserSe
 		this.jpaDao = userDao;
 	}
 
-	public boolean save(User user) {
+	public User save(User user) {
 		try {
 			if (user.getId() == null) {
 				user.setPassword(env.getProperty("default.password"));
 			} else {
 				user.setPassword(jpaDao.findOne(user.getId()).getPassword());
 			}
-			jpaDao.save(user);
-			return true;
+			return jpaDao.save(user);
 		} catch (Exception e) {
-			return true;
+			return null;
 		}
 	}
 }

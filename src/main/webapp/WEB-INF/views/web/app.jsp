@@ -7,12 +7,10 @@
 <%@ include file="../common/web/lib.jsp"%>
 <script>
 	require(
-			[ "dojo/_base/fx", "dijit/registry", "dojo/parser",
-					"dijit/layout/BorderContainer",
-					"dijit/layout/TabContainer", "dojox/layout/ContentPane",
-					"dijit/form/Button", "ext/core", "dojo/domReady!" ],
-			function(fx, registry, parser, BorderContainer, TabContainer,
-					ContentPane, Button, ext) {
+			[ "dojo/_base/fx", "dijit/registry", "dojo/parser", "dijit/layout/BorderContainer",
+					"dijit/layout/TabContainer", "dojox/layout/ContentPane", "dijit/form/Button", "ext/core",
+					"dojo/domReady!" ], function(fx, registry, parser, BorderContainer, TabContainer, ContentPane,
+					Button, ext) {
 
 				// create the BorderContainer and attach it to our appLayout div
 				var appLayout = new BorderContainer({}, "appLayout");
@@ -34,21 +32,17 @@
 						label : "退出",
 						onClick : function() {
 							pathname = document.location.pathname;
-							location.href = pathname.substr(0, pathname.substr(
-									1).indexOf('/') + 1)
-									+ '/logout';
+							location.href = pathname.substr(0, pathname.substr(1).indexOf('/') + 1) + '/logout';
 						}
 					})
 				}));
 				var img = 'resources/ui/web/dojo/gridx/resources/images/loadingAnimation.gif';
-				appLayout
-						.addChild(new ContentPane(
-								{
-									region : "left",
-									id : "leftCol",
-									splitter : true,
-									content : "<img name='m_loading' src='"+img+"'><div name='m_tree'></div>"
-								}));
+				appLayout.addChild(new ContentPane({
+					region : "left",
+					id : "leftCol",
+					splitter : true,
+					content : "<img name='m_loading' src='"+img+"'><div name='m_tree'></div>"
+				}));
 
 				// Add initial content to the TabContainer
 				contentTabs.addChild(new ContentPane({
@@ -59,40 +53,38 @@
 				// start up and do layout
 				appLayout.startup();
 
-				fx.fadeOut(
-						{
-							node : "preloader",
-							onEnd : function() {
-								var callback = function(tree, result) {
-									$('img[name=m_loading]')[0].remove();
+				fx.fadeOut({
+					node : "preloader",
+					onEnd : function() {
+						var callback = function(tree, result) {
+							$($('img[name=m_loading]')[0]).hide();
+						}
+						var click = function(item) {
+							if (item.url != '') {
+								ext.session();
+								if (!dijit.byId("tabs_" + item.id)) {
+									cp = new ContentPane({
+										id : "tabs_" + item.id,
+										title : item.name,
+										closable : true,
+										href : item.url
+									});
+									contentTabs.addChild(cp);
+									contentTabs.selectChild(cp);
+								} else {
+									contentTabs.selectChild(dijit.byId("tabs_" + item.id));
 								}
-								var click = function(item) {
-									if (item.url != '') {
-										ext.session();
-										if (!dijit.byId("tabs_" + item.id)) {
-											cp = new ContentPane({
-												id : "tabs_" + item.id,
-												title : item.name,
-												closable : true,
-												href : item.url
-											});
-											contentTabs.addChild(cp);
-											contentTabs.selectChild(cp);
-										} else {
-											contentTabs.selectChild(dijit
-													.byId("tabs_" + item.id));
-										}
-									}
-								}
-								ext.tree({
-									name : 'menu',
-									url : 's/menu/data',
-									callback : callback,
-									click : click
-								}, 'm_tree');
-								$(dojo.byId("preloader")).hide();
 							}
-						}).play();
+						}
+						ext.tree({
+							name : 'menu',
+							url : 's/menu/data',
+							callback : callback,
+							click : click
+						}, 'm_tree');
+						$(dojo.byId("preloader")).hide();
+					}
+				}).play();
 			});
 </script>
 </head>

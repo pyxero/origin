@@ -40,7 +40,7 @@ public class FilesController {
 	@ResponseBody
 	@RequestMapping(value = "/b/files/save", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String save(Files files) {
-		return JsonUtil.toString(ResultUtil.set(filesService.save(files)));
+		return JsonUtil.toString(ResultUtil.set(filesService.save(files) != null ? true : false));
 	}
 
 	@ResponseBody

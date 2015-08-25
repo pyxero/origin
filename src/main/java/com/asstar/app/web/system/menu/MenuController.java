@@ -46,7 +46,7 @@ public class MenuController {
 		if (menu.getMenu().getId() == null) {
 			menu.setMenu(null);
 		}
-		return JsonUtil.toString(ResultUtil.set(menuService.save(menu)));
+		return JsonUtil.toString(ResultUtil.set(menuService.save(menu) != null ? true : false));
 	}
 
 	@ResponseBody
