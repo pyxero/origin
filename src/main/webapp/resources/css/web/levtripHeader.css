@@ -1,0 +1,64 @@
+@font-face {font-family: 'iconfont';
+    src: url('../fonts/iconfont.eot'); /* IE9*/
+    src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/iconfont.woff') format('woff'), /* chrome銆乫irefox */
+    url('../fonts/iconfont.ttf') format('truetype'), /* chrome銆乫irefox銆乷pera銆丼afari, Android, iOS 4.2+*/
+    url('../fonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:18px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+
+
+body{overflow-x:hidden;}
+/*鏂囧瓧棰滆壊*/
+.color_b6{color:#b6b6b6;}
+.m_t_25{margin-top:25px;}
+
+/* 鎰忚鍙嶉绐楀彛 */
+
+.feedbackWrap{width:500px;padding:20px 30px;}
+.feedbackWrap textarea{border: 1px solid #ccc;font-size: 14px;height: 150px;line-height: 20px;padding: 10px;resize: none;width: 480px;overflow: auto;border-radius:3px;}
+.feedbackWrap textarea:focus{outline:none;}
+.feedbackWrap .btn{padding:5px 20px;background-color:#1397e5;border:0;color:#fff;cursor:pointer;margin-top:30px;border-radius:3px;}
+.feedbackWrap .btn:hover{background-color:#057aee;} 
+
+/*levtrip澶撮儴寮�--------------------------------------------------*/
+.header{width:100%;background-color:#444;height:50px;line-height:50px;}
+.header_box{width:1024px;height:50px;margin:0 auto;*margin-top:-50px;}
+.logo a{width:81px;height:0px;background:url(../../images/web/logo.png) no-repeat;padding-top:35px;overflow:hidden;display:block;margin-top:8px;}
+.nav{margin-left:50px;}
+.nav_item{width:100px;float:left;}
+.nav_item:hover,.nav li.current{background-color:#1397e5;}
+.nav_item a{color:#fff;display:block;}
+.nav_res{width:150px;left:0px;top:50px;z-index:99;border:1px solid #1397e5;}
+.nav_res a{background-color:#fff;color:#555;height:40px;line-height:40px;border-bottom:none;*margin-top:-10px;}
+.nav_res a:hover{background-color:#efefef;border-bottom:none;color:#1397e5;}
+.login{width:150px;}
+.userimg{margin-top:8px;}
+.userimg img{width:32px;border-radius:50%;}
+.userimg i{line-height:34px;}
+.user_menu{right:0px;top:42px;z-index:9999;border:1px solid #ccc;}
+.user_menu a{display:inline-block;width:80px;font-size:14px;color:#666;padding:0 20px;line-height:40px;}
+.user_menu a:hover{background-color:#efefef;}
+.usermsg{margin-right:15px;line-height:50px;}
+.usermsg_menu{right:-10px;top:50px;}
+.msgTip{background-color:#ff6815;left:-10px;top:-5px;}
+.msgTip,.usermsg_menu b{width:16px;height:16px;border-radius:50%;line-height:16px;font-weight:normal;font-size:10px;text-align:center;}
+.usermsg_menu b{float:right;background-color:#1398e5; margin-top:13px;color:#fff;}
+.header_searchWrap{width:150px;height:26px;margin-top:10px;}
+.header_search{width:150px;padding:7px 10px;height:14px;border:1px solid #fff;border-radius:3px;transition:width 0.2s linear 0s;}
+.header_search:focus{width:330px;outline:none;}
+.zoom{right:5px;top:0;line-height:30px;}
+.wlogin a{color:#fff;margin-left:10px;margin-right:10px;}
+.wlogin a:hover{text-decoration:underline;}
+/*levtrip澶撮儴缁撴潫*/
+/* 鍥炲埌椤堕儴寮�------------- */
+.rightline{position:fixed; border-right:3px solid #999;height:100%;right:0;top:0;z-index:9998;}
+.toolbarFooter{position:fixed; right:0; bottom:120px;  z-index:99999; }
+.toolTop,.toolFeedback{line-height:35px;text-align:center; width:35px;color:#fff; background-color:#999;margin-top:1px;border-radius:3px 0 0 3px;}
+.toolFeedback:hover,.toolTop:hover{background-color:#1398e5;}
+/* 鍥炲埌椤堕儴缁撴潫------------- */

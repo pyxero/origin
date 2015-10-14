@@ -1,8 +1,12 @@
 package com.asstar.app;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +21,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.asstar.app.authority.user.User;
 import com.asstar.app.authority.user.UserService;
 import com.asstar.app.common.entity.OAuthEntity;
+import com.asstar.app.common.util.MailUtil;
+import com.asstar.app.common.util.MsgUtil;
 import com.asstar.app.common.util.OAuthUtil;
+import com.asstar.app.common.util.ValidateUtil;
 
 /**
  * Handles requests for the application home page.
@@ -97,4 +105,25 @@ public class HomeController {
 
 	}
 
+	@RequestMapping(value = "/reg", method = RequestMethod.GET)
+	public String regist(String code, Model model) throws IOException {
+		// MailUtil.send("2928512493@qq.com", "aaa", "bbb");
+		return "reg";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/reg/info", method = RequestMethod.POST)
+	public String registInfo(String mail, String phone, String code, Model model) throws IOException {
+		if (mail != null) {
+			MailUtil.send(mail, "乐为游注册", "验证码为8888");
+		}else{
+			MsgUtil.send(phone);
+		}
+		return "{}";
+	}
+
+	@RequestMapping(value = "/code", method = RequestMethod.GET)
+	public void code(HttpServletRequest req, HttpServletResponse resp, String code, Model model) throws IOException {
+		ValidateUtil.getCode(req, resp);
+	}
 }

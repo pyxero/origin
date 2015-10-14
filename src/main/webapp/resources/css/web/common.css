@@ -1,0 +1,128 @@
+@charset "utf-8";
+/* CSS Document */
+/* 元素的定位属性 */
+.p_r{position:relative;}
+.p_a{position:absolute;}
+.p_f{position:fixed;}
+
+.fl{float:left;}
+.fr{float:right;}
+
+.cf:before,.cf:after {content:"";display:table;}/* 清除浮动 */
+.cf:after { clear:both; }/* For IE 6/7 (trigger hasLayout) */
+.cf{zoom:1; }
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { *zoom:1; }
+.overf{overflow:hidden;}
+.clear{clear:both;}
+
+.show{display:block;}
+.hide{display:none;}
+.lineb{display:inline-block;*display:inline;*zoom:1;}
+
+/*对齐方式*/
+.t_a_c{text-align:center;}
+.t_a_l{text-align:left;}
+.t_a_r{text-align:right;}
+
+
+/* 字体大小 */
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.f18{font-size:18px;}
+.f20{font-size:20px;}
+.f24{font-size:24px;}
+
+/*字颜色*/
+.color_f{color:#fff;}
+.color_blue{color:#057aee;}
+.color_orange{color:#ff6815;}
+.color_c2{color:#c2c2c2;}
+.color_5{color:#555;}
+.color_6{color:#666;}
+.color_7{color:#777;}
+.color_9{color:#999;}
+
+
+/* 背景 */
+.bg_f{background-color:#fff;}
+.bg_ef{background-color:#efefef;}
+.bg_c2{background-color:#c2c2c2;}
+.bg_blue{background-color:#1397e5;}
+.bg_orange{background-color:#ff6815;}
+
+/* 关于hover */
+a.bg_orange:hover{background-color:#f40;}
+a.bg_c2:hover{background-color:#999;}
+a.bg_blue:hover{background-color:#057aee;}
+
+.hCblue:hover{color:#1397e5;}
+.hCorange:hover{color:#ff6815;}
+.hBblue:hover{background-color:#1397e5;color:#fff;}
+.hUline:hover{text-decoration:underline;}
+
+
+/*margin*/
+.m_l_5{margin-left:5px;}
+.m_l_10{margin-left:10px;}
+.m_l_15{margin-left:15px;}
+.m_l_20{margin-left:20px;}
+.m_l_40{margin-left:40px;}
+
+.m_t_5{margin-top:5px;}
+.m_t_10{margin-top:10px;}
+.m_t_15{margin-top:15px;}
+.m_t_20{margin-top:20px;}
+.m_t_40{margin-top:40px;}
+
+.m_b_40{margin-bottom:40px;}
+
+
+/* 其他 */
+.tindent2{text-indent:2em;}
+.wnormal{font-weight:normal;}
+.snormal{font-style:normal;}
+.finger{cursor:pointer;}
+.bold{font-weight:bold;}
+.tline{ text-decoration:underline;}
+.italic{font-style:italic;}
+
+
+
+/* .btn{display:inline-block;padding:0 20px;line-height:35px;border-radius:3px;} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
