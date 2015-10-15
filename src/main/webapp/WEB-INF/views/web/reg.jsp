@@ -270,7 +270,7 @@
 		 	}
 		};
 	
-	// 检验当前手机号 邮箱是否已经注册	
+	// 检验当前手机号 邮箱是否已经注册	sadsadsa
    /**  function numCheck(value){
 		data = {
 				phone : phoneNo,
