@@ -17,6 +17,10 @@
 		var mailAdress, mailCode, phoneNo, phoneCode, data;
 		if (cur.length > 0) {
 			mailAdress = $("#mailAdress").val();
+	// 表单提交  邮箱校验	
+			if(!check("mail")){	return ;}
+			if(!blurCheck("mail")){	return ;	}
+			
 			mailCode = $("#mailCode").val();
 			if (typeof mailAdress == 'undefined' || mailAdress == ''
 					|| typeof mailCode == 'undefined' || mailCode == '') {
@@ -30,6 +34,11 @@
 		} else {
 			phoneNo = $("#phoneNo").val();
 			phoneCode = $("#phoneCode").val();
+		
+	 // 表单提交  手机、验证码校验	 
+			if(!check("phone")){return ;}
+			if(!blurCheck("phone")){return ;}
+			
 			if (typeof phoneNo == 'undefined' || phoneNo == ''
 					|| typeof phoneCode == 'undefined' || phoneCode == '') {
 				alert("null");
@@ -40,6 +49,7 @@
 				code : phoneCode
 			};
 		}
+		
 		$.ajax({
 			url : "reg/info",
 			type : "post",
@@ -60,35 +70,20 @@
 							'current');
 					$('.i_reg_box div').eq($(this).index()).addClass('current')
 							.siblings('div').removeClass('current');
+				// 切换注册方式， 清楚错误提示.	
+					$('#spanOra').remove();
 				});
-
-		//此函数表示 失去焦点时，若值为空，则提示错误信息
-		function blurInput(object, msg) {
-			//$(object).blur(function(e) {
-			var $parent = $(object).parent();
-			if (this.value == "") {
-				var errorMsg = msg;
-				$parent.find('.onError').remove();
-				$parent
-						.append('<span class="formtips onError color_orange"><br/>'
-								+ errorMsg + '</span>');
-				$(object).addClass('blur');
-			} else {
-				$parent.find('.onError').remove();
-				$(object).removeClass('blur');
-			}
-			//});	
-		}
+		
 		//邮箱的验证
-		blurInput('.yz', '! 请输入验证码');
-		blurInput('.useremail', '! 请输入邮箱');
+	//	blurInput('.yz', '! 请输入验证码');
+	//	blurInput('.useremail', '! 请输入邮箱');
 		blurInput('.emailPassword input:first', '! 密码长度8~16位，数字、字母、字符至少包含两种');
 		blurInput('.emailPassword input:last', '! 请确认密码');
 		//手机的验证
-		blurInput('.userphone', '! 请输入手机号码');
+//		blurInput('.userphone', '! 请输入手机号码');
 		blurInput('.phonePassword input:first', '! 密码长度8~16位，数字、字母、字符至少包含两种');
 		blurInput('.phonePassword input:last', '! 请确认密码');
-
+	
 		//此函数表示  点击某个按钮，某div显示  某div隐藏 且某标签填充某值
 		function showHide(object, showObt, label, valueObt) {
 			$(object).click(function(e) {
@@ -96,8 +91,7 @@
 				$(showObt).stop().show();
 				$(label).html($(valueObt).val());
 			})
-		}
-		;
+		};
 		//点击注册,即邮箱验证第二步
 		showHide('.reg_email .reg_btn', '.emailYz', '.emailYz h3 span',
 				'.useremail');
@@ -144,13 +138,13 @@
 			<div class="reg_body reg_email">
 				<p>
 					<input id="mailAdress" type="text" placeholder="请输入常用邮箱"
-						class="useremail" />
+						class="useremail" onBlur="check('mail');" />
 				</p>
 				<p class="overf">
-					<input id="mailCode" type="text" class="yz fl"
+					<input id="mailCode" type="text" class="yz fl" onBlur="blurCheck('mail');"
 						style="width: 150px;" placeholder="图片验证码" /> <a
-						href="javascript:;" class="yzpic fl" title="看不清，换一张"><img
-						src="code" height="35" alt="验证码图片" /></a><br />
+						href="javascript:next();" class="yzpic fl" title="看不清，换一张"><img
+						src="code" height="35" id ='imger1' alt="验证码图片" /></a><br />
 				</p>
 				<a href="javascript:reg();" class="reg_btn t_a_c bg_orange">立即注册</a>
 				<p class="d_login">
@@ -160,13 +154,13 @@
 			<div class="reg_body reg_phone current">
 				<p>
 					<input id="phoneNo" type="text" placeholder="请输入手机号码"
-						class="userphone" />
+						class="userphone"  onBlur="check('phone')"/>
 				</p>
 				<p class="overf">
-					<input id="phoneCode" type="text" class="yz fl"
+					<input id="phoneCode" type="text" class="yz fl" onBlur="blurCheck('phone');"
 						style="width: 155px;" placeholder="图片验证码" /> <a
-						href="javascript:;" class="yzpic fl" title="看不清，换一张"><img
-						src="code" height="35" alt="验证码图片" /></a><br />
+						href="javascript:next();;" class="yzpic fl" title="看不清，换一张"><img
+						src="code" height="35" id ='imger1' alt="验证码图片" /></a><br />
 				</p>
 				<a href="javascript:reg();" class="reg_btn t_a_c bg_orange">立即注册</a>
 				<p class="d_login">
@@ -190,4 +184,108 @@
 		<!-- picInfo_box -->
 	</div>
 </body>
+<script type="text/javascript">
+
+	//正则校验
+		function check(str){
+		
+				if(str == 'mail'){
+					var  val = $("#mailAdress").val().trim();
+					var mailReg = val.match(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+		 			if(mailReg){
+						blurInput(".useremail","格式正确");
+						return true;
+					}else{
+						blurInput(".useremail","您好，您的邮箱格式输入有误!");
+						return false;
+					}
+				}else if(str == 'phone'){
+					var val = $(".userphone").val().trim();
+					var phoneReg = val.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+					if(phoneReg){
+						blurInput(".userphone","格式正确");
+						return true;
+					}else{
+						blurInput(".userphone","您好，您的手机号码格式输入有误!");
+						return false;
+					}
+				}
+		   }
+				
+	//提示错误信息
+		function blurInput(object, msg) {
+			$(".color_orange").remove();
+			var $parent = $(object).parent();
+			if (!$(".color_orange").text()) {
+				if(msg =='格式正确'){
+					$(object).removeClass('blur');
+					$parent.find('.onError').remove();
+					return;
+				}					
+				var errorMsg = msg;
+				$parent
+						.append('<span class="formtips onError color_orange"><br/>'
+								+ errorMsg + '</span>');
+				$(object).addClass('blur');
+			// 消除错误提示
+			} else if(msg =='格式正确'){
+				alert("1111");
+				$(object).removeClass('blur');
+				$parent.find('.onError').remove();
+			}
+			
+		};
+		
+		// 更换验证码 图片	
+		function next(){
+			$(".yzpic>img").attr("src","http://localhost:8080/app/code?t="+Math.random());
+		}	
+		
+	 // 验证码 匹配
+	 	function blurCheck(obj){
+	 		var code = $("#imger1").val();
+		 	if(obj=='mail'){
+		 		
+		 		var mailCode = $("#mailCode").val().trim();
+		 		// 校验邮箱 验证码
+		 		if(mailCode!=null && mailCode!="" && mailCode!="null" && mailCode==code){
+		 			blurInput("#mailCode","格式正确");
+		 			return true;
+		 		}else{
+		 			blurInput("#mailCode","您输入验证码有误!");
+		 			return false;
+		 		}
+		 		
+		 	}else if(obj=='phone'){
+		 		
+		 		var phoneCode = $("#phoneCode").val().trim();
+		 		// 校验手机 验证码
+		 		if(phoneCode!=null && phoneCode!="" && phoneCode!="null" && phoneCode==code){
+		 			blurInput("#phoneCode","格式正确");
+		 			return true;
+		 		}else{
+		 			blurInput("#phoneCode","您输入验证码有误!");
+		 			return false;
+		 		}
+		 	}
+		};
+	
+	// 检验当前手机号 邮箱是否已经注册	
+   /**  function numCheck(value){
+		data = {
+				phone : phoneNo,
+				code : phoneCode
+			};
+		
+		$.ajax({
+			url : "reg/chk",
+			type : "post",
+			data : data,
+			success : function(res) {
+			},
+			error : function(res) {
+			}
+		});
+	} */	
+</script>
 </html>
