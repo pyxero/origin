@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,13 +114,20 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/reg/info", method = RequestMethod.POST)
-	public String registInfo(String mail, String phone, String code, Model model) throws IOException {
-		if (mail != null) {
-			MailUtil.send(mail, "乐为游注册", "验证码为8888");
-		}else{
-			MsgUtil.send(phone);
+	public String registInfo(HttpServletRequest req,String mail, String phone, String code, Model model) throws IOException {
+		HttpSession session = req.getSession();
+		int status = 0;
+		String msg = "验证码不正确";
+		if(code==null||code.equals("")||!code.equals(session.getAttribute("code"))){
+			return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
 		}
-		return "{}";
+		String verifyCode = ValidateUtil.createVerifyCode(req,0, 6);
+		if (mail != null) {
+			status=MailUtil.send(mail, "乐为游注册", verifyCode);
+		}else{
+			status=MsgUtil.send(phone,verifyCode);
+		}
+		return "{status:"+String.valueOf(status)+"}";
 	}
 
 	@RequestMapping(value = "/code", method = RequestMethod.GET)

@@ -16,7 +16,7 @@ public class MailUtil {
 	static String password = "qxdnyoujbpouswub";
 	static String from = "levtrip@126.com";
 
-	public static void send(String to, String subject, String content) {
+	public static int send(String to, String subject, String content) {
 		Properties props = new Properties();
 		props.setProperty("mail.smtp.host", host);
 		props.setProperty("mail.smtp.port", "25");
@@ -37,8 +37,10 @@ public class MailUtil {
 			transport.connect(host, user, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
+			return 1;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return 0;
 	}
 }

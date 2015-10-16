@@ -23,7 +23,18 @@ public class ValidateUtil {
 	private static int codeY = 26;
 	static char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
 			'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	public static String createVerifyCode(HttpServletRequest req,int type,int len) throws IOException {
+		String verifyCode = "000000";
+		HttpSession session = req.getSession();
+		session.setAttribute("verify", verifyCode);
+		return verifyCode;
+	}
+	public static boolean checkVerifyCode(String verifyCode) throws IOException {
+		
+		return true;
+	}
 
+		
 	public static void getCode(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		// ¶¨ÒåÍ¼Ïñbuffer
