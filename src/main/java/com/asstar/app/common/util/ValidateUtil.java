@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -21,22 +23,56 @@ public class ValidateUtil {
 	private static int xx = 15;
 	private static int fontHeight = 26;
 	private static int codeY = 26;
-	static char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
-			'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-	static char[] codeSequenceNum = {  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-	public static String createVerifyCode(HttpServletRequest req,int type,int len) throws IOException {
-		String verifyCode = "000000";
+	static char[] codeSequenceMul = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+			'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	static char[] codeSequenceNum = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+	/**
+	 * 
+	 * @param req
+	 * @param type
+	 * @param len
+	 * @return
+	 * @throws IOException
+	 */
+	public static String createVerifyCode(HttpServletRequest req, int type, int len) throws IOException {
+		char[] codeSequence = codeSequenceNum;
+		if (type == 1) {
+			codeSequence = codeSequenceMul;
+		}
+		String verifyCode = "";
+		Random random = new Random();
+		StringBuffer randomCode = new StringBuffer();
+		for (int i = 0; i < len; i++) {
+			// 得到随机产生的验证码数字。
+			String code = String.valueOf(codeSequence[random.nextInt(36)]);
+			// 将产生的四个随机数组合在一起。
+			randomCode.append(code);
+		}
+		verifyCode = randomCode.toString();
 		HttpSession session = req.getSession();
 		session.setAttribute("verify", verifyCode);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.MINUTE, 30);// 到期时间，30分钟后
+		session.setAttribute("verifyExpire", cal);
 		return verifyCode;
 	}
-	public static int checkVerifyCode(HttpServletRequest req,String verifyCode) throws IOException {
-		int status = 0;//验证码不正确，1正确，2超时
-		
+
+	public static int checkVerifyCode(HttpServletRequest req, String verifyCode) throws IOException {
+		HttpSession session = req.getSession();
+		int status = 0;// 验证码不正确，1正确，2超时
+		if (verifyCode == null || verifyCode.equals("") || !verifyCode.equals(session.getAttribute("verify"))) {
+			Calendar verCal = (Calendar) session.getAttribute("verifyExpire");// 验证码生成时间
+			Calendar calCur = Calendar.getInstance();// 当前时间
+			calCur.setTime(new Date());
+			if (verCal.after(calCur)) {
+				status = 1;// 未过期
+			}
+		}
 		return status;
 	}
 
-		
 	public static void getCode(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		// 定义图像buffer
@@ -76,7 +112,7 @@ public class ValidateUtil {
 		// 随机产生codeCount数字的验证码。
 		for (int i = 0; i < codeCount; i++) {
 			// 得到随机产生的验证码数字。
-			String code = String.valueOf(codeSequence[random.nextInt(36)]);
+			String code = String.valueOf(codeSequenceMul[random.nextInt(36)]);
 			// 产生随机的颜色分量来构造颜色值，这样输出的每位数字的颜色值都将不同。
 			red = random.nextInt(255);
 			green = random.nextInt(255);
