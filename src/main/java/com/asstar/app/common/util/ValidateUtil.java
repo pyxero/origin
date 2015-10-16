@@ -30,9 +30,10 @@ public class ValidateUtil {
 		session.setAttribute("verify", verifyCode);
 		return verifyCode;
 	}
-	public static boolean checkVerifyCode(HttpServletRequest req,String verifyCode) throws IOException {
+	public static int checkVerifyCode(HttpServletRequest req,String verifyCode) throws IOException {
+		int status = 0;//验证码不正确，1正确，2超时
 		
-		return true;
+		return status;
 	}
 
 		
