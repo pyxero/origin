@@ -114,24 +114,37 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/reg/info", method = RequestMethod.POST)
-	public String registInfo(HttpServletRequest req,String mail, String phone, String code, Model model) throws IOException {
+	public String registInfo(HttpServletRequest req,String mail, Integer strStatus,String phone, String code, Model model) throws IOException {
 		HttpSession session = req.getSession();
 		int status = 0;
-		String msg = "验证码不正确";
-		if(code==null||code.equals("")||!code.equals(session.getAttribute("code"))){
-			return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
-		}
-		String verifyCode = ValidateUtil.createVerifyCode(req,0, 6);
-		if (mail != null) {
-			status=MailUtil.send(mail, "乐为游注册", verifyCode);
+		if(strStatus < 1){ 	
+			String msg =""; 
+			if(mail != null){msg = "mail";}else{msg = "phone";}
+			if(code==null||code.equals("")||!code.equals(session.getAttribute("code"))){
+				return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
+			}else{
+				status = 1;
+				return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
+			}
 		}else{
-			status=MsgUtil.send(phone,verifyCode);
+			String verifyCode = ValidateUtil.createVerifyCode(req,1, 6);
+			if (mail != null) {
+				status=MailUtil.send(mail, "乐为游注册", verifyCode);
+			}else{
+				status=MsgUtil.send(phone,verifyCode);
+			}
+			return "{sendStatus:"+String.valueOf(status)+",}";
 		}
-		return "{status:"+String.valueOf(status)+"}";
 	}
 
 	@RequestMapping(value = "/code", method = RequestMethod.GET)
 	public void code(HttpServletRequest req, HttpServletResponse resp, String code, Model model) throws IOException {
 		ValidateUtil.getCode(req, resp);
 	}
+	
+	@RequestMapping(value = "/reg/checkCode", method = RequestMethod.POST)
+	public int code(HttpServletRequest req, String mail,String code) throws IOException {
+		return ValidateUtil.checkVerifyCode(req, code);
+	}
+	
 }
