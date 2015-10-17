@@ -392,10 +392,12 @@
     	function timeSpace(obj) {
     	        if (wait == 0) {
     	        	$(".reg_btn2").removeAttr('disabled');  // 可用
+    	        	$(".reg_btn2").addClass("bg_orange");   //恢复原样式
     	            $(".reg_btn2").val(obj);  //回复原文字
     	            wait = 60;
     	        } else {
     	        	$(".reg_btn2").attr('disabled',"true");	
+    	        	$(".reg_btn2").removeClass("bg_orange");
     	        	$(".reg_btn2").val("    重新获取  ( " + wait + " )      ");
     	            wait--;
     	            setTimeout(function() {
