@@ -19,19 +19,15 @@
 		});
 	})
 	function reg() {
-		var strStatus = 0;
-		if($(".bg_orange").text().indexOf('下一步下一步')>0){
-			strStatus = 0;
-		}else if($(".bg_orange").text().indexOf('注册')>0){
-			strStatus = 1;	  
-		}
+		
 		var cur = $(".reg_body.reg_email.current");
 		var mailAdress, mailCode, phoneNo, phoneCode, data;
 		if (cur.length > 0) {
 			mailAdress = $("#mailAdress").val();
 	// 表单提交  邮箱校验	
 			if(!check("mail")){	return ;}
-	//		if(!blurCheck("mail")){	return ;	}
+		//	if(!blurCheck('#mailCode')){return ;}
+		//	if(!blurCheck('#timeMail')){return ;}
 			
 			mailCode = $("#mailCode").val();
 			if (typeof mailAdress == 'undefined' || mailAdress == ''
@@ -41,8 +37,7 @@
 			}
 			data = {
 				mail : mailAdress,
-				code : mailCode,
-				strStatus:strStatus
+				code : mailCode
 			};
 		} else {
 			phoneNo = $("#phoneNo").val();
@@ -50,7 +45,8 @@
 		
 	 // 表单提交  手机、验证码校验	 
 			if(!check("phone")){return ;}
-		//	if(!blurCheck("phone")){return ;}
+	//		if(!blurCheck('#phoneCode')){return ;}
+	//		if(!blurCheck('#timePhone')){return ;}
 			
 			if (typeof phoneNo == 'undefined' || phoneNo == ''
 					|| typeof phoneCode == 'undefined' || phoneCode == '') {
@@ -59,11 +55,64 @@
 			}
 			data = {
 				phone : phoneNo,
-				code : phoneCode,
-				strStatus:strStatus
+				code : phoneCode
 			};
 		}
-		
+		if($(".reg_btn2").val().indexOf("重新获取") >0 ){
+			if(typeof $("#mailTimeLiness").val() !='undefined' && !(($("#mailTimeLiness").val() == ""))){
+				
+				data = {timeCode:$("#mailTimeLiness").val(),mail:$("#mailAdress").val()}
+				//给完成注册 按钮添加 click，save 
+				$.ajax({
+					url : "reg/checkCode",
+					type : "post",
+					async: false,
+					data : data,
+					success : function(res){
+						var str =  res.toString().split(",");
+						var status = str[0];
+					// 验证码输入不正确	
+						if(status.indexOf("0") > 0){
+							blurInput('#mailTimeLiness', '抱歉,输入验证码有误!');	
+							return ;
+					// 验证码超时		
+						}else if(status.indexOf("2") > 0){
+							blurInput('#mailTimeLiness', '抱歉,验证码已超时!！');
+							return ;
+						}
+					},error:function(res){} 
+				});
+				return ;
+			}else if(typeof $("#phoneTimeLiness").val() !='undefined'&& !($("#phoneTimeLiness").val() == "") ){
+				//给完成注册 按钮添加 click，save 
+				data = {timeCode:$("#phoneTimeLiness").val(),phone:$("#phoneNo").val()}
+				$.ajax({
+					url : "reg/checkCode",
+					type : "post",
+					async: false,
+					data : data,
+					success : function(res) {
+						var str =  res.toString().split(",");
+						var status = str[0];
+					// 验证码输入不正确	
+						if(status.indexOf("0") > 0){
+							blurInput('#phoneTimeLiness', '抱歉,输入验证码有误!');	
+							return ;
+					// 验证码超时		
+						}else if(status.indexOf("2") > 0){
+							blurInput('#phoneTimeLiness', '抱歉,验证码已超时!！');
+							return ;
+						}
+					},error:function(res){
+					}
+				});
+					return ;
+			}else{ 
+				blurInput('#phoneTimeLiness',"验证码不能为空");
+				blurInput('#mailTimeLiness',"验证码不能为空");
+				return ;
+			}
+		}
 		// 先去 比对 图片验证码， 返回状态
 		$.ajax({
 			url : "reg/info",
@@ -82,12 +131,18 @@
 							blurInput("#phoneCode","您输入验证码有误!");	
 							return ;
 						}
-					}else if (status.indexOf("1") >0){
+					}else if (status.indexOf("2") >0){
 						if(msg.indexOf("mail") > 0){
 							
 							$("#overfMail").hide();// 隐藏图片验证码	
 							$(".mailLiness").show();// 显示获取验证码
 							$("#mailReg").text("完成注册");
+							
+							if($("#reg_phone").val().indexOf("获取手机验证码")>0){
+								timeSpace("    获取手机验证码     ");
+							}else if($("#reg_mail").val().indexOf("获取邮箱验证码")>0){
+								timeSpace("    获取邮箱验证码     ");
+							}
 							
 							$("#mailAdress").attr("disabled",true);
 							$("#phoneNo").attr("disabled",true);
@@ -105,17 +160,15 @@
 							$("#mailAdress").attr("disabled",true);
 							$("#mailCode").attr("disabled",true);
 							$('#mailReg').removeAttr('href');
+							
+							if($("#reg_phone").val().indexOf("获取手机验证码")>0){
+									timeSpace("    获取手机验证码     ");
+							}else if($("#reg_mail").val().indexOf("获取邮箱验证码")>0){
+								timeSpace("    获取邮箱验证码     ");
+							}
 							return ;
 						}
 					}
-					//给完成注册 按钮添加 click，save 
-					$.ajax({
-						url : "reg/checkCode",
-						type : "post",
-						data : data,
-						success : function(res) {
-						},error:function(res){}
-					});
 			},
 			error : function(res) {
 				
@@ -204,15 +257,15 @@
 						class="useremail" onBlur="check('mail');" />
 				</p>
 				<p class="overf" id='overfMail'>
-					<input id="mailCode" type="text" class="yz fl" onBlur="blurCheck('mail');"
+					<input id="mailCode" type="text" class="yz fl" onBlur="blurCheck('#mailCode','0');"
 						style="width: 150px;" placeholder="图片验证码"   maxlength="4"/> <a
 						href="javascript:next();" class="yzpic fl" title="看不清，换一张"><img
 						src="code" height="35" id ='imger1' alt="验证码图片" /></a><br />
 				</p>
 				<p class="mailLiness timeLiness" >
-					<input id ='mailTimeLiness' type='text' style="width: 125px;" placeholder="请输入邮箱验证码" class="useremail" />
+					<input id ='mailTimeLiness' type='text' maxlength="6" id ='timeMail' onBlur="blurCheck('#timeMail','1');" style="width: 125px;" placeholder="请输入邮箱验证码" class="useremail" />
 					&nbsp;
-					<input type='button' id ='reg_mail'  maxlength="6" class='reg_btn2 t_a_c bg_orange' onClick='time("mail");' value='    获取邮箱验证码     ' />
+					<input type='button' id ='reg_mail'   class='reg_btn2 t_a_c bg_orange' onClick='time("mail");' value='    获取邮箱验证码     ' />
 				</p>
 				<br />	
 					<a href="javascript:reg();" id='mailReg'  class="reg_btn3 t_a_c bg_orange" >下一步</a>
@@ -226,16 +279,16 @@
 						class="userphone phone"  onBlur="check('phone')"/>
 				</p>
 				<p class="overf" id='overfPhone'>
-					<input id="phoneCode" type="text" class="yz fl" onBlur="blurCheck('phone');"
+					<input id="phoneCode" type="text" class="yz fl" onBlur="blurCheck('#phoneCode','0');"
 						style="width: 155px;" placeholder="图片验证码" maxlength="4" /> <a
 						href="javascript:next();;" class="yzpic fl" title="看不清，换一张"><img
 						src="code" height="35" id ='imger1' alt="验证码图片" /></a><br />
 				</p>
 				
 			<p class="phoneLiness timeLiness" >
-					<input id ='phoneTimeLiness' type='text'  maxlength="6"  style="width: 125px;" placeholder="请输入手机验证码" class="userphone" />
+					<input id ='phoneTimeLiness' id ='timePhone'  onBlur="blurCheck('#timePhone','1');" type='text'  maxlength="6"  style="width: 125px;" placeholder="请输入手机验证码" class="userphone" />
 					&nbsp;
-					<input type='button' id ='reg_phone' class='reg_btn2 t_a_c bg_orange' onClick='time("phone");' value='    获取手机验证码     ' />
+					<input type='button' id ='reg_phone'  class='reg_btn2 t_a_c bg_orange' onClick='time("phone");' value='    获取手机验证码     ' />
 				</p>
 				<br />
 				<a href="javascript:reg();" id='phoneReg' class="reg_btn3 t_a_c bg_orange">下一步</a>
@@ -315,7 +368,6 @@
 				$(object).addClass('blur');
 			// 消除错误提示
 			} else if(msg =='格式正确'){
-				alert("1111");
 				$(object).removeClass('blur');
 				$parent.find('.onError').remove();
 			}
@@ -328,47 +380,20 @@
 		}	
 		
 	 // 验证码 匹配
-	 	function blurCheck(obj){
-	 		var code = $("#imger1").val();
-	 		if(obj=='mail'){
-		 		
-		 		var mailCode = $("#mailCode").val().trim();
+	 	function blurCheck(id,status){
+		 		if(status == '0'){
+			 		var mailCode = $(id).val().trim();
+		 		}else{
+			 		var mailCode = $(id).val();
+		 		}
 		 		if(!mailCode){
-		 			blurInput("#mailCode","验证码不能为空");
-		 			return ;
-		 		}else{
-		 			blurInput("#mailCode","格式正确");
-		 		}
-		 		// 校验邮箱 验证码
-			/*	if(mailCode!=null && mailCode!="" && mailCode!="null" && mailCode==code){
-		 			blurInput("#mailCode","格式正确");
-		 			return true;
-		 		}else{
-		 			blurInput("#mailCode","您输入验证码有误!");
+		 			blurInput(id,"验证码不能为空");
 		 			return false;
-		 		}
-		 	*/
-		 		
-		 	}else if(obj=='phone'){
-		 		
-		 		var phoneCode = $("#phoneCode").val().trim();
-		 		if(!phoneCode){
-		 			blurInput("#phoneCode","验证码不能为空"); 
-		 			return ;
 		 		}else{
-		 			blurInput("#phoneCode","格式正确");
-		 		}
-		 	/* 校验手机 验证码
-		 		if(phoneCode!=null && phoneCode!="" && phoneCode!="null" && phoneCode==code){
-		 			blurInput("#phoneCode","格式正确");
+		 			blurInput(id,"格式正确");
+		 			reg();
 		 			return true;
-		 		}else{
-		 			blurInput("#phoneCode","您输入验证码有误!");
-		 			return false;
 		 		}
-		     */
-		 	}
-	 	  	
 		};
 		
 	// 发送验证码
@@ -394,9 +419,11 @@
     	        	$(".reg_btn2").removeAttr('disabled');  // 可用
     	        	$(".reg_btn2").addClass("bg_orange");   //恢复原样式
     	            $(".reg_btn2").val(obj);  //回复原文字
+    	            $(".reg_btn3").removeAttr('disabled'); 
     	            wait = 60;
     	        } else {
     	        	$(".reg_btn2").attr('disabled',"true");	
+    	        	$(".reg_btn3").attr('disabled',"true");	
     	        	$(".reg_btn2").removeClass("bg_orange");
     	        	$(".reg_btn2").val("    重新获取  ( " + wait + " )      ");
     	            wait--;
