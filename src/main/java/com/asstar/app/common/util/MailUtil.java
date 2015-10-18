@@ -9,6 +9,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 
 public class MailUtil {
 	static String host = "smtp.126.com";
@@ -30,8 +31,8 @@ public class MailUtil {
 			Message message = new MimeMessage(mailSession);
 			message.setFrom(new InternetAddress(from)); // 发件人
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to)); // 收件人
-			message.setSubject(subject); // 邮件主题
-			message.setText("您的注册密码是: " + verifyCode); // 邮件内容
+			message.setSubject(MimeUtility.encodeText(subject, "UTF-8", "B"));
+			message.setContent("您的注册验证码是:" + verifyCode, "text/html;charset=UTF-8");
 			message.saveChanges();
 			Transport transport = mailSession.getTransport("smtp");
 			transport.connect(host, user, password);
