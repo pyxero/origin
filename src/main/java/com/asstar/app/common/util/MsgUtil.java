@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -22,7 +20,7 @@ import sun.misc.BASE64Encoder;
 public class MsgUtil {
 
 	@SuppressWarnings("unchecked")
-	public static int send(String phone,String verifyCode) throws UnsupportedEncodingException {
+	public static int send(String phone,String verifyCode,String passCode) throws UnsupportedEncodingException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String stamp = sdf.format(new Date());
 		String hash = Md5Util
@@ -37,7 +35,7 @@ public class MsgUtil {
 		//map.put("templateId", 1);
 		//map.put("appId", "8a48b551505b4af001505c33115003e8");
 		//System.out.println(JsonUtil.toString(map));
-		StringEntity entity = new StringEntity("{datas:["+verifyCode+",30],templateId:1,to:13980553316,appId:8a48b551505b4af001505c33115003e8}", "utf-8");
+		StringEntity entity = new StringEntity("{datas:["+verifyCode+"   ÄúµÄ×¢²áÃÜÂëÊÇ: "+passCode+",30],templateId:1,to:18810455025,appId:8a48b551505b4af001505c33115003e8}", "utf-8");
 		entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
 		CloseableHttpClient httpclient = HttpClientBuilder.create().build();
@@ -52,10 +50,10 @@ public class MsgUtil {
 			String result = EntityUtils.toString(resultEntity, "UTF-8");
 			System.out.println(result);
 			httpPost.releaseConnection();
-			return 1;
+			return 2;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return 0; 
 	}
 }
