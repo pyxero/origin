@@ -62,7 +62,9 @@ public class ValidateUtil {
 	public static int checkVerifyCode(HttpServletRequest req, String verifyCode) throws IOException {
 		HttpSession session = req.getSession();
 		int status = 0;// 验证码不正确，1正确，2超时
-		if (verifyCode == null || verifyCode.equals("") || !verifyCode.equals(session.getAttribute("verify"))) {
+		System.out.println(session.getAttribute("verify"));
+		System.out.println(session.getAttribute("verifyExpire"));
+		if (!verifyCode.equals(session.getAttribute("verify"))) {
 			return 	status;	
 		}else{
 			Calendar verCal = (Calendar) session.getAttribute("verifyExpire");// 验证码生成时间

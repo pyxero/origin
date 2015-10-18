@@ -4,6 +4,7 @@ public class ResultEntity {
 
 	private boolean flag;
 	private String msg;
+	private int status;
 
 	public boolean isFlag() {
 		return flag;
@@ -19,6 +20,14 @@ public class ResultEntity {
 
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

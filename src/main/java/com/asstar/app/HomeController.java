@@ -3,6 +3,7 @@ package com.asstar.app;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.asstar.app.authority.user.User;
 import com.asstar.app.authority.user.UserService;
-import com.asstar.app.authority.user.UserServiceImpl;
 import com.asstar.app.common.entity.OAuthEntity;
-import com.asstar.app.common.util.MailUtil;
-import com.asstar.app.common.util.MsgUtil;
+import com.asstar.app.common.util.JsonUtil;
 import com.asstar.app.common.util.OAuthUtil;
+import com.asstar.app.common.util.ResultUtil;
+import com.asstar.app.common.util.TaskUtil;
 import com.asstar.app.common.util.ValidateUtil;
 
 /**
@@ -109,69 +110,80 @@ public class HomeController {
 
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
 	public String regist(String code, Model model) throws IOException {
-		// MailUtil.send("2928512493@qq.com", "aaa", "bbb");
 		return "reg";
+	}
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(String code, Model model) throws IOException {
+		return "home";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/reg/info", method = RequestMethod.POST)
-	public String registInfo(HttpServletRequest req,String mail,String phone, String code, Model model) throws IOException {
-			HttpSession session = req.getSession();
-			int status = 0;
-			String msg = "";
-			if(mail != null){ msg = "mail";}else{  msg = "phone";}
-			if(code==null||code.equals("")||!code.equals(session.getAttribute("code"))){
-				return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
+	public String registInfo(HttpServletRequest req, String mail, String phone, String code, Model model)
+			throws IOException {
+		HttpSession session = req.getSession();
+		HashMap<String, String> map = new HashMap<String, String>();
+		boolean flag = false;
+		String msg = "验证码错误";
+		if (code == null || code.equals("")
+				|| !code.trim().toLowerCase().equals(session.getAttribute("code").toString().toLowerCase())) {
+			return JsonUtil.toString(ResultUtil.set(flag, msg));
+		} else {
+			flag = true;
+			msg = "验证码正确";
+			if (mail != null && !mail.equals("")) {
+				map.put("target", mail);
+			} else {
+				map.put("target", phone);
 			}
-			String verifyCode = ValidateUtil.createVerifyCode(req,0, 6);
-			String passCode = ValidateUtil.createVerifyCode(req,0, 6);
-			if (mail != null) {
-				session.setAttribute(mail, passCode);
-				status=MailUtil.send(mail, "乐为游注册", verifyCode,passCode);
-			}else{
-				session.setAttribute(phone, passCode);
-				status=MsgUtil.send(phone,verifyCode,passCode);
-			}
-			return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
-			
+		}
+		String verifyCode = ValidateUtil.createVerifyCode(req, 0, 6);
+		map.put("subject", "验证码信息");
+		map.put("verifyCode", verifyCode);
+		TaskUtil task = new TaskUtil(map);
+		Thread thread = new Thread(task);
+		thread.start();
+		return JsonUtil.toString(ResultUtil.set(flag, msg));
 	}
 
 	@RequestMapping(value = "/code", method = RequestMethod.GET)
 	public void code(HttpServletRequest req, HttpServletResponse resp, String code, Model model) throws IOException {
 		ValidateUtil.getCode(req, resp);
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/reg/checkCode", method = RequestMethod.POST)
-	public String checkCode(HttpServletRequest req, String mail,String timeCode,String phone,Model model) throws IOException {
-		HttpSession session = req.getSession();
-		int ver = ValidateUtil.checkVerifyCode(req, timeCode);
-		if(ver==0 || ver==2){
-			return "{status:"+String.valueOf(ver)+",}";
-		}else if(ver==1){
+	public String checkCode(HttpServletRequest req, String mail, String verify, String phone, Model model)
+			throws IOException {
+		int status = ValidateUtil.checkVerifyCode(req, verify);
+		boolean flag = false;
+		String msg = "验证失败";
+		if (status == 0 || status == 2) {
+			return JsonUtil.toString(ResultUtil.set(flag, msg, status));
+		} else {
+			String password = ValidateUtil.createVerifyCode(req, 0, 6);
 			User user = new User();
-			if (mail != null){
+			if (mail != null) {
+				user.setNo(mail);
 				user.setUsername(mail);
-				user.setModifier(mail);
-				user.setPassword(session.getAttribute(mail).toString());
-			}else{
+				user.setPassword(password);
+			} else {
+				user.setNo(phone);
 				user.setUsername(phone);
-				user.setModifier(phone);
-				user.setPassword(session.getAttribute(phone).toString());
+				user.setPassword(password);
 			}
 			user.setEnabled(true);
-			user.setAccountNonExpired(false);
-			user.setAccountNonLocked(false);
-			user.setCredentialsNonExpired(false);
-			user.setCreater("admin");
-			user.setCreateTime(new Date());
-			user.setModifyTime(new Date());
-			user.setVersion(1);
-			user.setNo("YES");
-			UserServiceImpl con = new UserServiceImpl();
-			con.save(user);
-			return "{status:"+String.valueOf(ver)+",}";
+			user.setAccountNonExpired(true);
+			user.setAccountNonLocked(true);
+			user.setCredentialsNonExpired(true);
+			user.setVersion(0);
+			userService.save(user);
+			status = 1;
+			flag = true;
+			msg = "验证成功";
+			return JsonUtil.toString(ResultUtil.set(flag, msg, status));
 		}
-		return "";
 	}
-	
+
 }
