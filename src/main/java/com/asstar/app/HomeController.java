@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.asstar.app.authority.user.User;
 import com.asstar.app.authority.user.UserService;
+import com.asstar.app.authority.user.UserServiceImpl;
 import com.asstar.app.common.entity.OAuthEntity;
 import com.asstar.app.common.util.MailUtil;
 import com.asstar.app.common.util.MsgUtil;
@@ -114,37 +115,63 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/reg/info", method = RequestMethod.POST)
-	public String registInfo(HttpServletRequest req,String mail, Integer strStatus,String phone, String code, Model model) throws IOException {
-		HttpSession session = req.getSession();
-		int status = 0;
-		if(strStatus < 1){ 	
-			String msg =""; 
-			if(mail != null){msg = "mail";}else{msg = "phone";}
+	public String registInfo(HttpServletRequest req,String mail,String phone, String code, Model model) throws IOException {
+			HttpSession session = req.getSession();
+			int status = 0;
+			String msg = "";
+			if(mail != null){ msg = "mail";}else{  msg = "phone";}
 			if(code==null||code.equals("")||!code.equals(session.getAttribute("code"))){
 				return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
-			}else{
-				status = 1;
-				return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
 			}
-		}else{
-			String verifyCode = ValidateUtil.createVerifyCode(req,1, 6);
+			String verifyCode = ValidateUtil.createVerifyCode(req,0, 6);
+			String passCode = ValidateUtil.createVerifyCode(req,0, 6);
 			if (mail != null) {
-				status=MailUtil.send(mail, "乐为游注册", verifyCode);
+				session.setAttribute(mail, passCode);
+				status=MailUtil.send(mail, "乐为游注册", verifyCode,passCode);
 			}else{
-				status=MsgUtil.send(phone,verifyCode);
+				session.setAttribute(phone, passCode);
+				status=MsgUtil.send(phone,verifyCode,passCode);
 			}
-			return "{sendStatus:"+String.valueOf(status)+",}";
-		}
+			return "{status:"+String.valueOf(status)+",msg:"+msg+"}";
+			
 	}
 
 	@RequestMapping(value = "/code", method = RequestMethod.GET)
 	public void code(HttpServletRequest req, HttpServletResponse resp, String code, Model model) throws IOException {
 		ValidateUtil.getCode(req, resp);
 	}
-	
+	@ResponseBody
 	@RequestMapping(value = "/reg/checkCode", method = RequestMethod.POST)
-	public int code(HttpServletRequest req, String mail,String code) throws IOException {
-		return ValidateUtil.checkVerifyCode(req, code);
+	public String checkCode(HttpServletRequest req, String mail,String timeCode,String phone,Model model) throws IOException {
+		HttpSession session = req.getSession();
+		int ver = ValidateUtil.checkVerifyCode(req, timeCode);
+		if(ver==0 || ver==2){
+			return "{status:"+String.valueOf(ver)+",}";
+		}else if(ver==1){
+			User user = new User();
+			if (mail != null){
+				user.setUsername(mail);
+				user.setModifier(mail);
+				user.setPassword(session.getAttribute(mail).toString());
+			}else{
+				user.setUsername(phone);
+				user.setModifier(phone);
+				user.setPassword(session.getAttribute(phone).toString());
+			}
+			user.setEnabled(true);
+			user.setAccountNonExpired(false);
+			user.setAccountNonLocked(false);
+			user.setCredentialsNonExpired(false);
+			user.setCreater("admin");
+			user.setCreateTime(new Date());
+			user.setModifyTime(new Date());
+			user.setVersion(1);
+			user.setNo("YES");
+			UserServiceImpl con = new UserServiceImpl();
+			con.save(user);
+			return "{status:"+String.valueOf(ver)+",}";
+		}
+		return "";
 	}
 	
 }
