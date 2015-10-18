@@ -20,7 +20,7 @@ import sun.misc.BASE64Encoder;
 public class MsgUtil {
 
 	@SuppressWarnings("unchecked")
-	public static int send(String phone, String subject, String verifyCode) throws UnsupportedEncodingException {
+	public static int send(String phone, String subject, String verify) throws UnsupportedEncodingException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String stamp = sdf.format(new Date());
 		String hash = Md5Util
@@ -35,7 +35,7 @@ public class MsgUtil {
 		// map.put("templateId", 1);
 		// map.put("appId", "8a48b551505b4af001505c33115003e8");
 		// System.out.println(JsonUtil.toString(map));
-		StringEntity entity = new StringEntity("{datas:['ÄúµÄ×¢²áÃÜÂëÊÇ:" + verifyCode + "',30],templateId:1,to:" + phone
+		StringEntity entity = new StringEntity("{datas:['ÄúµÄ×¢²áÃÜÂëÊÇ:" + verify + "',30],templateId:1,to:" + phone
 				+ ",appId:8a48b551505b4af001505c33115003e8}", "utf-8");
 		entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 

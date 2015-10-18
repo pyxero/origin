@@ -134,13 +134,14 @@ public class HomeController {
 			flag = true;
 			msg = "验证码正确";
 			if (mail != null && !mail.equals("")) {
+				map.put("type", "mail");
 				map.put("target", mail);
 			} else {
+				map.put("type", "phone");
 				map.put("target", phone);
 			}
 		}
 		String verify = ValidateUtil.createVerifyCode(req, 0, 6);
-		System.out.println(verify);
 		map.put("subject", "验证码信息");
 		map.put("verify", verify);
 		TaskUtil task = new TaskUtil(map);
@@ -152,6 +153,22 @@ public class HomeController {
 	@RequestMapping(value = "/code", method = RequestMethod.GET)
 	public void code(HttpServletRequest req, HttpServletResponse resp, String code, Model model) throws IOException {
 		ValidateUtil.getCode(req, resp);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/reg/repeat", method = RequestMethod.POST)
+	public String repeat(HttpServletRequest req, HttpServletResponse resp, String mail, String phone, String code)
+			throws IOException {
+		User user = new User();
+		if (mail != null) {
+			user.setNo(mail);
+		} else {
+			user.setNo(phone);
+		}
+		if (userService.findByNo(user.getNo()) != null) {
+			return JsonUtil.toString(ResultUtil.set(true, "账号已存在"));
+		}
+		return JsonUtil.toString(ResultUtil.set(false, "账号不存在"));
 	}
 
 	@ResponseBody

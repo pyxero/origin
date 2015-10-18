@@ -50,93 +50,148 @@
 			};
 			finish = $("#phoneNo")[0].disabled;
 		}
-		if (finish) {
-			if (cur.length > 0) {
-				data = {
-					verify : $("#mailTimeLiness").val(),
-					mail : $("#mailAdress").val()
-				}
-			} else {
-				data = {
-					verify : $("#phoneTimeLiness").val(),
-					phone : $("#phoneNo").val()
-				}
-			}
-			$.ajax({
-				url : "reg/checkCode",
-				type : "POST",
-				data : data,
-				dataType : "json",
-				success : function(res) {
-					console.log(res);
-					if (res.status == 0) {
-						if (cur.length > 0) {
-							blurInput('#mailTimeLiness', '抱歉,输入验证码有误!');
-							return;
-						} else {
-							blurInput('#phoneTimeLiness', '抱歉,输入验证码有误!');
-							return;
-						}
-					} else if (res.status == 2) {
-						if (cur.length > 0) {
-							blurInput('#mailTimeLiness', '抱歉,验证码已超时!！');
-							return;
-						} else {
-							blurInput('#phoneTimeLiness', '抱歉,验证码已超时!！');
-							return;
-						}
-					} else {
-						window.location.href = "home";
-					}
-				}
-			});
-		}
 		$
 				.ajax({
-					url : "reg/info",
+					url : "reg/repeat",
 					type : "POST",
 					data : data,
 					dataType : "json",
 					success : function(res) {
 						if (res.flag == true) {
 							if (cur.length > 0) {
-								$("#overfMail").hide();// 隐藏图片验证码	
-								$(".mailLiness").show();// 显示获取验证码
-								$("#mailReg").text("完成注册");
-								if ($("#reg_phone").val().indexOf("获取手机验证码") > 0) {
-									timeSpace("获取手机验证码");
-								} else if ($("#reg_mail").val().indexOf(
-										"获取邮箱验证码") > 0) {
-									timeSpace("获取邮箱验证码");
-								}
-								$("#mailAdress").attr("disabled", true);
-								$("#phoneNo").attr("disabled", true);
-								$("#phoneCode").attr("disabled", true);
-								$("#phoneReg").removeAttr('href');
-								return;
+								alert('账号已存在!');
 							} else {
-								$("#overfPhone").hide();
-								$(".phoneLiness").show();
-								$("#phoneReg").text("完成注册");
-								$("#phoneNo").attr("disabled", true);
-								$("#mailAdress").attr("disabled", true);
-								$("#mailCode").attr("disabled", true);
-								$('#mailReg').removeAttr('href');
-								if ($("#reg_phone").val().indexOf("获取手机验证码") > 0) {
-									timeSpace("    获取手机验证码     ");
-								} else if ($("#reg_mail").val().indexOf(
-										"获取邮箱验证码") > 0) {
-									timeSpace("    获取邮箱验证码     ");
-								}
-								return;
-							}
-						} else {
-							if (cur.length > 0) {
-								blurInput("#mailCode", "您输入的验证码有误!");
-							} else {
-								blurInput("#phoneCode", "您输入的验证码有误!");
+								alert('账号已存在!');
 							}
 							return;
+						} else {
+							if (finish) {
+								if (cur.length > 0) {
+									data = {
+										verify : $("#mailTimeLiness").val(),
+										mail : $("#mailAdress").val()
+									}
+								} else {
+									data = {
+										verify : $("#phoneTimeLiness").val(),
+										phone : $("#phoneNo").val()
+									}
+								}
+								$.ajax({
+									url : "reg/checkCode",
+									type : "POST",
+									data : data,
+									dataType : "json",
+									success : function(res) {
+										if (res.status == 0) {
+											if (cur.length > 0) {
+												blurInput('#mailTimeLiness',
+														'抱歉,输入验证码有误!');
+												return;
+											} else {
+												blurInput('#phoneTimeLiness',
+														'抱歉,输入验证码有误!');
+												return;
+											}
+										} else if (res.status == 2) {
+											if (cur.length > 0) {
+												blurInput('#mailTimeLiness',
+														'抱歉,验证码已超时!');
+												return;
+											} else {
+												blurInput('#phoneTimeLiness',
+														'抱歉,验证码已超时!');
+												return;
+											}
+										} else {
+											window.location.href = "home";
+										}
+									}
+								});
+							} else {
+								$
+										.ajax({
+											url : "reg/info",
+											type : "POST",
+											data : data,
+											dataType : "json",
+											success : function(res) {
+												if (res.flag == true) {
+													if (cur.length > 0) {
+														$("#overfMail").hide();// 隐藏图片验证码	
+														$(".mailLiness").show();// 显示获取验证码
+														$("#mailReg").text(
+																"完成注册");
+														if ($("#reg_phone")
+																.val()
+																.indexOf(
+																		"获取手机验证码") > 0) {
+															timeSpace("获取手机验证码");
+														} else if ($(
+																"#reg_mail")
+																.val()
+																.indexOf(
+																		"获取邮箱验证码") > 0) {
+															timeSpace("获取邮箱验证码");
+														}
+														$("#mailAdress").attr(
+																"disabled",
+																true);
+														$("#phoneNo").attr(
+																"disabled",
+																true);
+														$("#phoneCode").attr(
+																"disabled",
+																true);
+														$("#phoneReg")
+																.removeAttr(
+																		'href');
+														return;
+													} else {
+														$("#overfPhone").hide();
+														$(".phoneLiness")
+																.show();
+														$("#phoneReg").text(
+																"完成注册");
+														$("#phoneNo").attr(
+																"disabled",
+																true);
+														$("#mailAdress").attr(
+																"disabled",
+																true);
+														$("#mailCode").attr(
+																"disabled",
+																true);
+														$('#mailReg')
+																.removeAttr(
+																		'href');
+														if ($("#reg_phone")
+																.val()
+																.indexOf(
+																		"获取手机验证码") > 0) {
+															timeSpace("    获取手机验证码     ");
+														} else if ($(
+																"#reg_mail")
+																.val()
+																.indexOf(
+																		"获取邮箱验证码") > 0) {
+															timeSpace("    获取邮箱验证码     ");
+														}
+														return;
+													}
+												} else {
+													if (cur.length > 0) {
+														blurInput("#mailCode",
+																"您输入的验证码有误!");
+													} else {
+														blurInput("#phoneCode",
+																"您输入的验证码有误!");
+													}
+													return;
+												}
+											}
+										});
+							}
 						}
 					}
 				});
@@ -330,9 +385,15 @@
 	}
 
 	//提示错误信息
-	function blurInput(object, msg) {
+	function blurInput(object, msg, info) {
 		$(".color_orange").remove();
 		var $parent = $(object).parent();
+		if (info != null) {
+			var errorMsg = msg;
+			$parent.append('<span class="formtips onError color_orange"><br/>'
+					+ errorMsg + '</span>');
+			$(object).addClass('blur');
+		}
 		if (!$(".color_orange").text()) {
 			if (msg == '格式正确') {
 				$(object).removeClass('blur');
@@ -350,7 +411,6 @@
 		}
 
 	};
-
 	// 更换验证码 图片	
 	function next() {
 		$(".yzpic>img").attr("src", "code?t=" + Math.random());
