@@ -28,7 +28,7 @@
 </script>
 </head>
 
-<body style="background:url(images/index_bg.png) no-repeat;background-size:cover;">
+<body style="background:url(resources/images/web/index_bg.png) no-repeat;background-size:cover;">
 <div class="maskall hide">  
 </div>
 <div class="forie t_a_c hide">
@@ -62,7 +62,7 @@
             <p class=" wlogin fr hide"><a href="javascript:;">登录</a>|<a href="javascript:;">注册</a></p><!-- wlogin -->
             <div class="ylogin">
          				<div class="userimg fr p_r">
-                	<a href="javascript:;"><img src="images/levpic.png" alt="头像"  title="头像" class="fl" width="32"/><i class="iconfont color_f">&#xe619;</i></a>
+                	<a href="javascript:;"><img src="resources/images/web/levpic.png" alt="头像"  title="头像" class="fl" width="32"/><i class="iconfont color_f">&#xe619;</i></a>
                   <ul class="userimg_menu user_menu p_a bg_f hide">
                     <li><a href="javascript:;">我的乐为游</a></li>
                     <li><a href="javascript:;">我的活动</a></li>

@@ -18,6 +18,7 @@ import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -138,9 +139,10 @@ public class HomeController {
 				map.put("target", phone);
 			}
 		}
-		String verifyCode = ValidateUtil.createVerifyCode(req, 0, 6);
+		String verify = ValidateUtil.createVerifyCode(req, 0, 6);
+		System.out.println(verify);
 		map.put("subject", "验证码信息");
-		map.put("verifyCode", verifyCode);
+		map.put("verify", verify);
 		TaskUtil task = new TaskUtil(map);
 		Thread thread = new Thread(task);
 		thread.start();
@@ -182,7 +184,15 @@ public class HomeController {
 			status = 1;
 			flag = true;
 			msg = "验证成功";
-			return JsonUtil.toString(ResultUtil.set(flag, msg, status));
+			try {
+				UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getNo(),
+						user.getPassword());
+				Authentication authentication = authenticationManager.authenticate(authRequest);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				return JsonUtil.toString(ResultUtil.set(flag, msg, status));
+			} catch (AuthenticationException e) {
+				return JsonUtil.toString(ResultUtil.set(false, e.getMessage()));
+			}
 		}
 	}
 

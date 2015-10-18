@@ -24,9 +24,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/", "/show/**", "/login", "/verify", "/reg/**", "/code", "/home", "/session").permitAll()
-				.anyRequest().hasRole("LOGIN");
+		http.authorizeRequests().antMatchers("/", "/login", "/verify", "/reg/**", "/code").permitAll().anyRequest()
+				.hasRole("LOGIN");
 		http.formLogin().loginPage("/login").usernameParameter("no").passwordParameter("password").permitAll();
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 		http.csrf().disable();

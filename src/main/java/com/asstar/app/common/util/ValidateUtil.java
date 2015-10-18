@@ -36,7 +36,7 @@ public class ValidateUtil {
 	 * @throws IOException
 	 */
 	public static String createVerifyCode(HttpServletRequest req, int type, int len) throws IOException {
- 		char[] codeSequence = codeSequenceNum;
+		char[] codeSequence = codeSequenceNum;
 		if (type == 1) {
 			codeSequence = codeSequenceMul;
 		}
@@ -58,22 +58,21 @@ public class ValidateUtil {
 		session.setAttribute("verifyExpire", cal);
 		return verifyCode;
 	}
-	
+
 	public static int checkVerifyCode(HttpServletRequest req, String verifyCode) throws IOException {
 		HttpSession session = req.getSession();
 		int status = 0;// 验证码不正确，1正确，2超时
 		System.out.println(session.getAttribute("verify"));
-		System.out.println(session.getAttribute("verifyExpire"));
 		if (!verifyCode.equals(session.getAttribute("verify"))) {
-			return 	status;	
-		}else{
+			return status;
+		} else {
 			Calendar verCal = (Calendar) session.getAttribute("verifyExpire");// 验证码生成时间
 			Calendar calCur = Calendar.getInstance();// 当前时间
 			calCur.setTime(new Date());
 			if (verCal.after(calCur)) {
 				status = 1;// 未过期
 			}
-			
+
 		}
 		return status;
 	}

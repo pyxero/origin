@@ -13,7 +13,7 @@ public class TaskUtil implements Runnable {
 	public void run() {
 		String target = (String) map.get("target");
 		String subject = (String) map.get("subject");
-		String verifyCode = (String) map.get("verifyCode");
-		MailUtil.send(target, subject, verifyCode);
+		String verify = (String) map.get("verify");
+		MailUtil.send(target, subject, verify);
 	}
 }

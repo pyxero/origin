@@ -38,7 +38,6 @@
 				mail : $("#mailAdress").val(),
 				code : $("#mailCode").val()
 			};
-			console.log($("#mailAdress")[0].disabled);
 			finish = $("#mailAdress")[0].disabled;
 		} else {
 			// 表单提交  手机、验证码校验	 
@@ -69,6 +68,7 @@
 				data : data,
 				dataType : "json",
 				success : function(res) {
+					console.log(res);
 					if (res.status == 0) {
 						if (cur.length > 0) {
 							blurInput('#mailTimeLiness', '抱歉,输入验证码有误!');
@@ -98,7 +98,6 @@
 					data : data,
 					dataType : "json",
 					success : function(res) {
-						console.log(res);
 						if (res.flag == true) {
 							if (cur.length > 0) {
 								$("#overfMail").hide();// 隐藏图片验证码	
