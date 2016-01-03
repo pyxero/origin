@@ -59,7 +59,7 @@ public class HomeController {
 		model.addAttribute("device", sitePreference);
 
 		if (sitePreference == SitePreference.NORMAL) {
-			return "login";
+			return "admin/login";
 		} else if (sitePreference == SitePreference.MOBILE) {
 			return "app";
 		} else if (sitePreference == SitePreference.TABLET) {
@@ -76,7 +76,7 @@ public class HomeController {
 		if (sitePreference == SitePreference.NORMAL) {
 			return "app";
 		} else {
-			return "login";
+			return "admin/login";
 		}
 
 	}
@@ -104,7 +104,7 @@ public class HomeController {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			return "app";
 		} else {
-			return "login";
+			return "admin/login";
 		}
 
 	}
@@ -126,13 +126,13 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		HashMap<String, String> map = new HashMap<String, String>();
 		boolean flag = false;
-		String msg = "ÑéÖ¤Âë´íÎó";
+		String msg = "ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½";
 		if (code == null || code.equals("")
 				|| !code.trim().toLowerCase().equals(session.getAttribute("code").toString().toLowerCase())) {
 			return JsonUtil.toString(ResultUtil.set(flag, msg));
 		} else {
 			flag = true;
-			msg = "ÑéÖ¤ÂëÕýÈ·";
+			msg = "ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½È·";
 			if (mail != null && !mail.equals("")) {
 				map.put("type", "mail");
 				map.put("target", mail);
@@ -142,7 +142,7 @@ public class HomeController {
 			}
 		}
 		String verify = ValidateUtil.createVerifyCode(req, 0, 6);
-		map.put("subject", "ÑéÖ¤ÂëÐÅÏ¢");
+		map.put("subject", "ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½Ï¢");
 		map.put("verify", verify);
 		TaskUtil task = new TaskUtil(map);
 		Thread thread = new Thread(task);
@@ -166,9 +166,9 @@ public class HomeController {
 			user.setNo(phone);
 		}
 		if (userService.findByNo(user.getNo()) != null) {
-			return JsonUtil.toString(ResultUtil.set(true, "ÕËºÅÒÑ´æÔÚ"));
+			return JsonUtil.toString(ResultUtil.set(true, "ï¿½Ëºï¿½ï¿½Ñ´ï¿½ï¿½ï¿½"));
 		}
-		return JsonUtil.toString(ResultUtil.set(false, "ÕËºÅ²»´æÔÚ"));
+		return JsonUtil.toString(ResultUtil.set(false, "ï¿½ËºÅ²ï¿½ï¿½ï¿½ï¿½ï¿½"));
 	}
 
 	@ResponseBody
@@ -177,7 +177,7 @@ public class HomeController {
 			throws IOException {
 		int status = ValidateUtil.checkVerifyCode(req, verify);
 		boolean flag = false;
-		String msg = "ÑéÖ¤Ê§°Ü";
+		String msg = "ï¿½ï¿½Ö¤Ê§ï¿½ï¿½";
 		if (status == 0 || status == 2) {
 			return JsonUtil.toString(ResultUtil.set(flag, msg, status));
 		} else {
@@ -200,7 +200,7 @@ public class HomeController {
 			userService.save(user);
 			status = 1;
 			flag = true;
-			msg = "ÑéÖ¤³É¹¦";
+			msg = "ï¿½ï¿½Ö¤ï¿½É¹ï¿½";
 			try {
 				UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getNo(),
 						user.getPassword());
