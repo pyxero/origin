@@ -11,17 +11,22 @@
 <script type="text/javascript" src="resources/ui/hi-u/lib/respond.min.js"></script>
 <script type="text/javascript" src="resources/ui/hi-u/lib/PIE_IE678.js"></script>
 <![endif]-->
-<link href="resources/ui/hi-u/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="resources/ui/hi-u/css/H-ui.login.css" rel="stylesheet" type="text/css" />
-<link href="resources/ui/hi-u/css/style.css" rel="stylesheet" type="text/css" />
-<link href="resources/ui/hi-u/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="../ui/hi-u/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="../ui/hi-u/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+<link href="../ui/hi-u/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../ui/hi-u/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>后台登录 - H-ui.admin v2.3</title>
-<meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-<meta name="description" content="H-ui.admin v2.3，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+<title>德艺舞蹈俱乐部</title>
+<meta name="keywords" content="德艺舞蹈俱乐部">
+<meta name="description" content="德艺舞蹈俱乐部">
+<style>
+	.header {     background:  url(../page_img/logo1.png) no-repeat 0 center; height: 17%;margin-left:10%; text-align:center;}
+	.loginBox{ position:absolute; width:100%; background:url(../images/admin-loginform-bg.png) no-repeat; left:50%; top:50%; margin-left:-50%; margin-top:-30%; }
+	.tx-wid{width:85%;}
+</style>
 </head>
 	<script type="text/javascript">
 	function target(){
@@ -35,40 +40,47 @@
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="index.html" method="post">
+    <br />
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="" name="" type="text" placeholder="账户" class="input-text size-L">
+          <input id="" name="" type="text" placeholder="账户"   class="input-text tx-wid size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-8">
-          <input id="" name="" type="password" placeholder="密码" class="input-text size-L">
+          <input id="" name="" type="password" placeholder="密码" class="input-text tx-wid size-L">
+        </div>
+      </div>
+       <div class="row cl">
+        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-8">
+          <input id="" name="" type="password" placeholder="确认密码" class="input-text tx-wid size-L">
+        </div>
+      </div>
+        <div class="row cl">
+        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-8">
+          <input id="" name="" type="password" placeholder="手机号" class="input-text tx-wid size-L">
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-8 col-offset-3">
-          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-          <img src="images/VerifyCode.aspx.png"> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
+        	<input id="" name="" type="password" placeholder="验证码:" class="input-text size-L" style="width:40%;">
+          
+          <img src=""> <input name="" type="reset" class="btn radius" value="获取验证码"> </div>
       </div>
       <div class="row">
-        <div class="formControls col-8 col-offset-3">
-          <label for="online">
-            <input type="checkbox" name="online" id="online" value="">
-            使我保持登录状态</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="formControls col-8 col-offset-3">
-          <a href="<%=request.getContextPath() %>/page/index.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"></a>
+        <div class="formControls col-8 col-offset-3" style="    text-align: center;">
+          <a href="<%=request.getContextPath() %>/page/index.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;" style="width:100px;margin-top:-4px" ></a>
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
     </form>
   </div>
 </div>
-<div class="footer">Copyright 你的公司名称 by H-ui.admin.v2.3</div>
+<div class="footer">德艺舞蹈俱乐部</div>
 <script type="text/javascript" src="resources/ui/hi-u/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="resources/ui/hi-u/js/H-ui.js"></script> 
 <script>

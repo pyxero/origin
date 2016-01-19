@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http//www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http//www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE></TITLE>
+<META content="text/html; charset=GBK" http-equiv=Content-Type>
+<META name=viewport content="width=device-width, minimum-scale=1.0, maximum-scale=2.0">
+<LINK rel=stylesheet type=text/css href="css/liebiao.css">
+<style>
+	.Logo {text-align:center; width:90%;     height: 25%; border-bottom: #990101 2px solid; margin: 0 auto;margin-bottom:5%;}
+	.online_text{ margin-bottom: 1%;}
+</style>
+</HEAD>
+<BODY>
+<div class="Logo"><IMG src="../page_img/logo1.png" width="100%" height="100%"></div>
+<div class="main">
+	<div class="top">
+  <div class="box">
+  <div class="about">
+  <div class="online_k" style="margin-left: 5%;">
+    <form action="http://localhost:8080/app/login/" type="post" name="sign_up" id="sign_up">
+	<div class="online_text">姓名：<input name="name" type="text" id="name" size="20" /></div>
+	<div class="online_text">性别：<input name="sex" type="radio" id="sex"  value="男"/>男士　<input name="sex" type="radio" id="sex"  value="女"/>女士</div>
+	<div class="online_text">电话：<input name="phone" type="text" id="phone" size="20" /></div>
+	<div class="online_text">邮箱：<input name="email" type="text" id="email" size="20" /></div>
+	<div class="online_text">课程：
+	    <select name="course" id="course" style="margin-left:-3px;height: 26px;width:197px">
+	    	    <option value="" selected="selected">选择</option>
+	          <option value="经理人领导力脱产培训班">经理人领导力脱产培训班</option>
+	          <option value="总裁领导力再造高级研修班">总裁领导力再造高级研修班</option>
+	          <option value="资本运营总裁领导力高级研修班">资本运营总裁领导力高级研修班</option>
+	          <option value="房地产总裁领导力再造高级研修班">房地产总裁领导力再造高级研修班</option>
+	  </select>
+   </div>
+  <div class="online_text">备注：</div>
+   <div class="online_text" style="margin-bottom:16px ">
+     <textarea name="remarks" id="remarks" cols="26" rows="7" style="margin-left: 48px;margin-top:-16px "></textarea>
+   </div>
+  <div class="online_tijiao" style="    text-align: center;">
+    <input type="button" value="提交" onclick="s()" />
+    <input type="button" value="取消" onclick="s()" />
+    </div>
+    </form>
+	 </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+if(/(Android)/i.test(navigator.userAgent)){
+	document.getElementById("tel_1").href= "wtai://wp/mc;4006581599";
+	document.getElementById("tel_bottom").href= "wtai://wp/mc;4006581599";
+	document.getElementById("phone_bottom").href= "wtai://wp/mc;18910732278";
+	}
+</script>
+<script type="text/javascript">
+function Check(){
+	
+ if (document.sign_up.course.value==""){alert("请选择意向课程！");return false;}
+if (document.sign_up.name.value==""){alert("清输入您的姓名！");return false;}
+if (document.sign_up.phone.value==""){alert("清输入您的联系电话！");return false;}
+if (document.sign_up.course.value==""){alert("请选择意向课程！");return false;} 
+return true
+} 
+function s(){
+	if(Check()){
+		document.location.href = "http://192.168.0.106:8080/app/login/";
+		}
+}
+     </script> 
+</BODY>
+</HTML>
+
+

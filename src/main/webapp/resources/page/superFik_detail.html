@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http//www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http//www.w3.org/1999/xhtml">
+<HEAD>
+<title>德艺舞蹈俱乐部</title>
+</HEAD>
+<style>
+#cnt{width:90%;height:220%;margin-left:5%;}
+.ctrl{text-align:center;font-size:12px;cursor:pointer;}
+.Logo {text-align:center; width:90%;     height: 25%; border-bottom: #990101 2px solid; margin: 0 auto;margin-bottom:5%;}
+.remark{   margin-top: 5%;}
+span.bt1 {  margin-left:5%;  font-size: 27px;    font-weight: bold;color: #FF8802;}
+span.bt2 {  margin-left:5%;  font-size: 22px;    color: #000;}
+.remark1 {  margin-left:5%;  font-size: 22px;    color: #000;}
+</style>
+<script defer='defer'>
+    var curOpac = 0;
+    var filterTimer;
+    var isIE = /internet explorer/i.test(window.navigator.appName);
+    function MyScroll(cnt, control){
+        this.data = [];  // 存放图片路径
+    this.interval = 3000;  // 过渡一次的间隔时间(过渡时间+图片显示时间)
+        this.timer;  // 定时器：控制当前显示的图片
+    this.container = cnt;
+        this.curFrame = 0;
+        this.oldFrame = 0;
+        this.controls = control;  // 按钮集合
+    Global = this;          // 获取对象的指针
+    this.run = function(){
+         this.timer = window.setInterval("Global.showFrame()", this.interval);
+        }
+        // 按钮的处理程序
+        this.go = function(i){
+            curOpac = 0; // 透明度归0
+            this.curFrame = i;  // 当前要过渡的图片
+            this.stop();  // 清空计时器
+            this.showFrame();  // 当前图片过渡
+            this.run();  // 循环播放
+        }
+        this.stop = function(){
+            window.clearInterval(this.timer);
+            window.clearInterval(filterTimer);
+        }
+        this.showFrame = function(){
+            // 设置当前按钮样式
+      this.controls[this.oldFrame].style.backgroundColor = "white";
+            this.controls[this.curFrame].style.backgroundColor = "gray";
+            if(isIE) this.container.style.filter = "alpha(opacity=0)";
+            else this.container.style.cssText = "-moz-opacity:0";
+            this.container.innerHTML = this.data[this.curFrame];
+            filterTimer = window.setInterval("blend()", 100);
+            this.oldFrame = this.curFrame;
+            this.curFrame ++;
+            if(this.curFrame == this.data.length){
+                this.curFrame = 0;
+            }            
+        }
+    }
+     // 增加透明度
+    function blend(){
+        curOpac+=10;
+        if(isIE) Global.container.style.filter='alpha(opacity=' + curOpac + ')';
+        else Global.container.style.cssText = "-moz-opacity:" + curOpac/100.0;
+
+        if(curOpac == 100){
+            curOpac = 0;
+            window.clearInterval(filterTimer);
+        }
+    }
+    //开始
+    function startIt(){
+        var imgArr = [];
+        // 创建4个图片对象保存图片路径
+        for(var i=0;i<3;i++){
+            imgArr[i] = new Image();
+            imgArr[i].src = "../page_img/wall" + (i + 1) + ".jpg";
+        }
+        var controlArr = $("mainTb").getElementsByTagName("span");
+        for(var i=0;i<controlArr.length;i++){
+            controlArr[i].tag = i;
+            controlArr[i].onclick = function(){
+                myScroll.go(this.tag);
+            }
+        }
+        var myScroll = new MyScroll($("cnt"), controlArr);
+        myScroll.data.push("<img width=\"100%\" height=\"100%\" src='" + imgArr[0].src + "'>");
+        myScroll.data.push("<img width=\"100%\" height=\"100%\" src='" + imgArr[1].src + "'>");
+        myScroll.data.push("<img width=\"100%\" height=\"100%\" src='" + imgArr[2].src + "'>");
+        myScroll.go(0);
+    }
+    window.onload = startIt;
+    function $(id){ return document.getElementById(id);}
+</script>
+<BODY>
+<div class="Logo"><IMG src="../page_img/logo1.png" width="100%" height="100%"></div>
+<table width="100%" height="100" id="mainTb">
+    <tr><div id="cnt" style="width:100%;height:40%">&nbsp;</div></tr>
+	<tr><td><span class="ctrl"></span></td>
+	    <td><span class="ctrl"></span></td>
+	    <td><span class="ctrl"></span></td> </tr>
+<div class="remark" >	    
+	<tr><td><span class="bt1">成人有氧拉丁课程（中班）</span></td></tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+	 <tr><td><span class="bt2"> &nbsp; &nbsp;  &nbsp; &nbsp; 有氧拉丁的音乐是拉丁风格的，动作以摆胯为主，大多数情况以脚尖落地，具有柔中带刚的感觉，现场气氛异常热烈，很容易就找到了有氧拉丁的异国情调。</span></td></tr>
+	 	<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+		<tr><td> </td> </tr>
+	 	<tr><td><span class="remark1">授课教师：</span> <span class="remark1">张老师</span>  <span class="remark1">郝老师</span></td></tr>
+	 	    <tr><td> </td> </tr>
+			<tr><td> </td> </tr>
+			<tr><td> </td> </tr>
+	 	   <tr><td>	<span class="remark1">上课时间：</span> <span class="remark1">每周一、三、五晚19：00-20:30</span></td></tr>
+	      	 <tr><td> </td> </tr>
+			<tr><td> </td> </tr>
+			<tr><td> </td> </tr>
+	      	  <tr><td><span class="remark1">班级人数：</span> <span class="remark1">8</span></td></tr>
+	    
+	    
+   </div>
+</table>
+</BODY>
+</HTML>
