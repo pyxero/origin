@@ -88,7 +88,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(String code, Model model) {
-		if (code != null) {
+		/*if (code != null) {
 			OAuthEntity oAuth = OAuthUtil.getUserInfo(code);
 			logger.info("login user: " + oAuth.getUserId());
 			User user = userService.findByNo(oAuth.getUserId());
@@ -105,8 +105,8 @@ public class HomeController {
 			return "app";
 		} else {
 			return "admin/login";
-		}
-
+		}*/
+		return "/page/index";
 	}
 
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
@@ -126,13 +126,13 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		HashMap<String, String> map = new HashMap<String, String>();
 		boolean flag = false;
-		String msg = "��֤�����";
+		String msg = "锟斤拷证锟斤拷锟斤拷锟�";
 		if (code == null || code.equals("")
 				|| !code.trim().toLowerCase().equals(session.getAttribute("code").toString().toLowerCase())) {
 			return JsonUtil.toString(ResultUtil.set(flag, msg));
 		} else {
 			flag = true;
-			msg = "��֤����ȷ";
+			msg = "锟斤拷证锟斤拷锟斤拷确";
 			if (mail != null && !mail.equals("")) {
 				map.put("type", "mail");
 				map.put("target", mail);
@@ -142,7 +142,7 @@ public class HomeController {
 			}
 		}
 		String verify = ValidateUtil.createVerifyCode(req, 0, 6);
-		map.put("subject", "��֤����Ϣ");
+		map.put("subject", "锟斤拷证锟斤拷锟斤拷息");
 		map.put("verify", verify);
 		TaskUtil task = new TaskUtil(map);
 		Thread thread = new Thread(task);
@@ -166,9 +166,9 @@ public class HomeController {
 			user.setNo(phone);
 		}
 		if (userService.findByNo(user.getNo()) != null) {
-			return JsonUtil.toString(ResultUtil.set(true, "�˺��Ѵ���"));
+			return JsonUtil.toString(ResultUtil.set(true, "锟剿猴拷锟窖达拷锟斤拷"));
 		}
-		return JsonUtil.toString(ResultUtil.set(false, "�˺Ų�����"));
+		return JsonUtil.toString(ResultUtil.set(false, "锟剿号诧拷锟斤拷锟斤拷"));
 	}
 
 	@ResponseBody
@@ -177,7 +177,7 @@ public class HomeController {
 			throws IOException {
 		int status = ValidateUtil.checkVerifyCode(req, verify);
 		boolean flag = false;
-		String msg = "��֤ʧ��";
+		String msg = "锟斤拷证失锟斤拷";
 		if (status == 0 || status == 2) {
 			return JsonUtil.toString(ResultUtil.set(flag, msg, status));
 		} else {
@@ -200,7 +200,7 @@ public class HomeController {
 			userService.save(user);
 			status = 1;
 			flag = true;
-			msg = "��֤�ɹ�";
+			msg = "锟斤拷证锟缴癸拷";
 			try {
 				UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getNo(),
 						user.getPassword());
