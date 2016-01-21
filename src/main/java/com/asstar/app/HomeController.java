@@ -61,7 +61,7 @@ public class HomeController {
 		if (sitePreference == SitePreference.NORMAL) {
 			return "admin/login";
 		} else if (sitePreference == SitePreference.MOBILE) {
-			return "app";
+			return "/page/index";
 		} else if (sitePreference == SitePreference.TABLET) {
 			return "app";
 		} else {
@@ -106,7 +106,7 @@ public class HomeController {
 		} else {
 			return "admin/login";
 		}*/
-		return "/page/index";
+		return "admin/login";
 	}
 
 	@RequestMapping(value = "/reg", method = RequestMethod.GET)
