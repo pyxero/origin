@@ -22,6 +22,36 @@
 <title>后台登录 - H-ui.admin v2.3</title>
 <meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v2.3，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+<style>
+	.header {
+    width: 100%;
+}
+	.input-text, .textarea{
+		width: 80%;
+	}
+	body{
+		width:100%;
+	}
+	.form-horizontal .row{
+		width:90%;
+	}
+	.footer {
+    width: 100%;
+    }
+    .loginWraper {
+    width: 100%;
+    }
+    .loginBox{ position:absolute; width:800px;height:480px; background:url(resources/ui/hi-u/images/admin-loginform-bg.png) no-repeat;  top:30%;left:25%; }
+    .col-3 {
+    width: 15%;
+	}
+	.col-offset-3 {
+    margin-left: 15%;
+}	
+	.btn.size-L {
+    height: 42px;
+    }
+</style>
 </head>
 	<script type="text/javascript">
 	function target(){
@@ -29,12 +59,13 @@
 	
 	}
 	</script>
-<body>
+<body >
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="index.html" method="post">
+    	<br />
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
@@ -61,7 +92,7 @@
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
-          <a href="<%=request.getContextPath() %>/page/index.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"></a>
+          <a href="resources/page/superFik.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"></a>
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>

@@ -69,7 +69,7 @@
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3" style="    text-align: center;">
-          <a href="<%=request.getContextPath() %>/page/index.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" style="width:100px;margin-top:-4px" ></a>
+          <a href="javascript:history.go(-1)" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" style="width:100px;margin-top:-4px" ></a>
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
