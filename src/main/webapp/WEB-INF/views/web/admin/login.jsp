@@ -30,21 +30,21 @@
     width: 100%;
 }
  #logo-img {
-    width: 9%;
+       width: 8%;
     height: 60%;
     margin-left: 5%;
     margin-top: 10px;
 }
 #logo-div {
-    margin-left: 17%;
+     margin-left: 15%;
     margin-top: -33px;
 }
 	
 #logo-text {
-    font-size: 22px;
+       font-size: 22px;
     font-weight: bold;
     color: #fff;
-    letter-spacing: 8px;
+    letter-spacing: 5px;
 }	
 	
 	.input-text, .textarea{
