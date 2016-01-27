@@ -23,9 +23,30 @@
 <meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v2.3，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 <style>
-	.header {
+.header {
+    top: 0;
+    height: 60px;
+    background: #426374  no-repeat 0 center;
     width: 100%;
 }
+ #logo-img {
+    width: 9%;
+    height: 60%;
+    margin-left: 5%;
+    margin-top: 10px;
+}
+#logo-div {
+    margin-left: 17%;
+    margin-top: -33px;
+}
+	
+#logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 8px;
+}	
+	
 	.input-text, .textarea{
 		width: 80%;
 	}
@@ -61,7 +82,10 @@
 	</script>
 <body >
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header"></div>
+<div class="header">
+	<img src="resources/page_img/jx-02.png" id="logo-img" alt="logo" width="64" />
+	<div id="logo-div"><span id="logo-text">聚享平台</span></div>
+</div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="index.html" method="post">
@@ -92,14 +116,17 @@
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
-          <a href="resources/page/superFik.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"></a>
+          <a href="resources/page/H-UI/H-ui.admin.html" ><input name=""  class="btn btn-success radius size-L"  value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"></a>
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
     </form>
   </div>
 </div>
-<div class="footer">Copyright 你的公司名称 by H-ui.admin.v2.3</div>
+<div class="footer">
+	<img src="resources/page_img/jx-02.png"  alt="logo" width="5%" height="50%" width="64" />
+	聚享平台提供
+</div>
 <script type="text/javascript" src="resources/ui/hi-u/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="resources/ui/hi-u/js/H-ui.js"></script> 
 <script>
