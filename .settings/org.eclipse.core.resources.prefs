@@ -1,6 +1,15 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/asstar/app/HomeController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/index.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/admin/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/product-add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/product-brand.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/product-category-add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/product-category.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/product-list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/system-data.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/system-log.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/admin/welcome.jsp=UTF-8
 encoding//src/main/webapp/resources/css/web/levtripHeader.css=UTF-8
 encoding//src/main/webapp/resources/page/login.jsp=UTF-8
 encoding//src/main/webapp/resources/page/reg.jsp=UTF-8
-encoding/<project>=UTF-8

@@ -61,22 +61,32 @@ public class HomeController {
 		if (sitePreference == SitePreference.NORMAL) {
 			return "admin/login";
 		} else if (sitePreference == SitePreference.MOBILE) {
-			return "/page/index";
+			return "admin/login";
 		} else if (sitePreference == SitePreference.TABLET) {
-			return "app";
+			return "admin/login";
 		} else {
-			return "app";
+			return "admin/login";
 		}
 
 	}
 
-	@RequestMapping(value = "/smcp", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String smcp(SitePreference sitePreference, Locale locale, Model model) {
-
 		if (sitePreference == SitePreference.NORMAL) {
-			return "app";
+			return "admin/index";
 		} else {
 			return "admin/login";
+		}
+
+	}
+
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String myTab(SitePreference sitePreference, Locale locale, Model model) {
+
+		if (sitePreference == SitePreference.NORMAL) {
+			return "admin/welcome";
+		} else {
+			return "admin/welcome";
 		}
 
 	}
@@ -85,38 +95,31 @@ public class HomeController {
 	public String path(Locale locale, String url) {
 		return url;
 	}
-
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(String code, Model model) {
-		/*if (code != null) {
-			OAuthEntity oAuth = OAuthUtil.getUserInfo(code);
-			logger.info("login user: " + oAuth.getUserId());
-			User user = userService.findByNo(oAuth.getUserId());
-			String password = "";
-			if (user != null) {
-				password = user.getPassword();
-			} else {
-				return "login";
-			}
-			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(oAuth.getUserId(),
-					password);
-			Authentication authentication = authenticationManager.authenticate(authRequest);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			return "app";
-		} else {
-			return "admin/login";
-		}*/
+	public String login(HttpServletRequest req, String code, String username, String password, Model model) {
 		return "admin/login";
 	}
 
-	@RequestMapping(value = "/reg", method = RequestMethod.GET)
-	public String regist(String code, Model model) throws IOException {
-		return "reg";
-	}
+	@ResponseBody
+	@RequestMapping(value = "/verify", method = RequestMethod.GET)
+	public String verify(HttpServletRequest req, String code, String username, String password, Model model) {
+		HttpSession session = req.getSession();
+		if (code == null || code.equals("")
+				|| !code.trim().toLowerCase().equals(session.getAttribute("code").toString().toLowerCase())) {
+			return JsonUtil.toString(ResultUtil.set(false, "code error"));
+		} else {
+			try {
+				UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+						username.trim(), password.trim());
+				Authentication authentication = authenticationManager.authenticate(authRequest);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				return JsonUtil.toString(ResultUtil.set(true, "login success"));
+			} catch (AuthenticationException e) {
+				return JsonUtil.toString(ResultUtil.set(false, "username or password error"));
+			}
+		}
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(String code, Model model) throws IOException {
-		return "home";
 	}
 
 	@ResponseBody

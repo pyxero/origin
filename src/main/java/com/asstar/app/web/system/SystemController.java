@@ -29,20 +29,6 @@ public class SystemController {
 	private MenuService menuService;
 
 	@ResponseBody
-	@RequestMapping(value = "/verify", method = RequestMethod.GET)
-	public String verify(User user) {
-		try {
-			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getNo(),
-					user.getPassword());
-			Authentication authentication = authenticationManager.authenticate(authRequest);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			return JsonUtil.toString(ResultUtil.set(true));
-		} catch (AuthenticationException e) {
-			return JsonUtil.toString(ResultUtil.set(false, e.getMessage()));
-		}
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/session", method = RequestMethod.GET, produces = "application/json;text/html;charset=UTF-8")
 	public String session(HttpServletRequest request) {
 		if (!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
