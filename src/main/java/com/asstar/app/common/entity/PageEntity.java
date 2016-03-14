@@ -7,6 +7,8 @@ public class PageEntity {
 	private int start = 0;
 	private int count = 0;
 	private int total = 0;
+	private int length= 10;  //每页显示 条数   默认10 
+	
 	private List<?> content;
 
 	public int getStart() {
@@ -41,4 +43,13 @@ public class PageEntity {
 		this.content = content;
 	}
 
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
+	
 }
