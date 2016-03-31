@@ -35,7 +35,7 @@ public class BrandController {
 //		map.put("iTotalDisplayRecords", "1");
 //		map.put("aaData", list);
 		Map mapq = new HashMap<Object, Object>();
-		
+		brandService.queryPage();
 		map.put("data", list);
 		return JsonUtil.toString(map);//HttpUtil.httpPage(page);
 	}

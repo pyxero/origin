@@ -8,7 +8,7 @@ import com.asstar.app.common.entity.PageEntity;
 
 public interface JpaService<M> {
 
-	public Page<M> page(M m, PageEntity pEntity, Object... objets);
+//	public Page<M> page(M m, PageEntity pEntity, Object... objets);
 
 	public List<M> findAll();
 
